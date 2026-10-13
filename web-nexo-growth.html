@@ -10,15 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #070b1d;
-    --bg-2: #0d1330;
-    --ink: #eef2ff;
-    --muted: #9aa3c7;
-    --line: rgba(238, 242, 255, 0.1);
-    --coral: #ff7a59;
-    --gold: #ffc46b;
-    --paramo: #9cc8a8;
-    --grad: linear-gradient(100deg, var(--coral), var(--gold));
+    --bg: #050505;
+    --bg-2: #0e0e0e;
+    --ink: #f5f5f5;
+    --muted: #9a9a9a;
+    --line: rgba(255, 255, 255, 0.1);
+    --green: #00C805;
+    --green-lt: #5BFF6A;
+    --grad: linear-gradient(100deg, var(--green), var(--green-lt));
     --display: 'Syne', sans-serif;
     --body: 'Manrope', sans-serif;
     --mono: 'JetBrains Mono', monospace;
@@ -36,10 +35,10 @@
     overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
-  ::selection { background: var(--coral); color: var(--bg); }
+  ::selection { background: var(--green); color: var(--bg); }
   ::-webkit-scrollbar { width: 10px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: linear-gradient(var(--coral), var(--gold)); border-radius: 10px; border: 2px solid var(--bg); }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(var(--green), var(--green-lt)); border-radius: 10px; border: 2px solid var(--bg); }
 
   .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
   .eyebrow {
@@ -47,10 +46,10 @@
     font-size: 13px;
     letter-spacing: .18em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--green-lt);
   }
   .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .ph { color: var(--coral); font-family: var(--mono); font-size: .9em; }
+  .ph { color: var(--green); font-family: var(--mono); font-size: .9em; }
 
   /* ---------- NAV ---------- */
   .nav {
@@ -59,7 +58,7 @@
     border-bottom: 1px solid transparent;
   }
   .nav.scrolled {
-    background: rgba(7, 11, 29, .62);
+    background: rgba(5, 5, 5, .62);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     border-color: var(--line);
@@ -76,12 +75,12 @@
     display: inline-flex; align-items: center; gap: 10px;
     padding: 14px 26px; border-radius: 100px;
     font-weight: 700; font-size: 15px;
-    background: var(--grad); color: #1a0f0a;
+    background: var(--grad); color: #000000;
     transition: transform .3s var(--ease), box-shadow .3s;
-    box-shadow: 0 10px 30px -10px rgba(255, 122, 89, .6);
+    box-shadow: 0 10px 30px -10px rgba(0, 200, 5, .6);
     border: 0; cursor: pointer; font-family: var(--body);
   }
-  .btn:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -12px rgba(255, 122, 89, .8); }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -12px rgba(0, 200, 5, .8); }
   .btn.ghost { background: rgba(255,255,255,.06); color: var(--ink); box-shadow: none; border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(6px); }
   .btn.ghost:hover { background: rgba(255,255,255,.12); }
   .nav .btn { padding: 10px 20px; font-size: 14px; }
@@ -108,7 +107,7 @@
     display: flex; flex-direction: column; align-items: center; gap: 12px;
     font-family: var(--mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
   }
-  .scroll-hint i { width: 1px; height: 54px; background: linear-gradient(var(--gold), transparent); position: relative; overflow: hidden; }
+  .scroll-hint i { width: 1px; height: 54px; background: linear-gradient(var(--green-lt), transparent); position: relative; overflow: hidden; }
   .scroll-hint i::after { content: ''; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: #fff; animation: drip 1.8s var(--ease) infinite; }
   @keyframes drip { to { top: 120%; } }
 
@@ -117,9 +116,9 @@
   .summit h2 {
     font-family: var(--display); font-weight: 800;
     font-size: clamp(38px, 4.4vw, 66px); line-height: 1; letter-spacing: -.035em;
-    margin: 18px 0 22px; text-shadow: 0 6px 40px rgba(7,11,29,.5);
+    margin: 18px 0 22px; text-shadow: 0 6px 40px rgba(5, 5, 5, .5);
   }
-  .summit p { font-size: 19px; color: #dfe4fb; max-width: 460px; margin-bottom: 32px; text-shadow: 0 2px 20px rgba(7,11,29,.7); }
+  .summit p { font-size: 19px; color: #e6e6e6; max-width: 460px; margin-bottom: 32px; text-shadow: 0 2px 20px rgba(5, 5, 5, .7); }
   .summit .ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 
   .altimeter {
@@ -127,12 +126,12 @@
     z-index: 3; display: flex; align-items: center; gap: 16px; font-family: var(--mono);
   }
   .alt-track { width: 2px; height: 64px; background: rgba(255,255,255,.12); position: relative; border-radius: 2px; }
-  .alt-fill { position: absolute; left: 0; bottom: 0; width: 100%; height: 0; background: linear-gradient(to top, var(--coral), var(--gold)); border-radius: 2px; }
-  .alt-fill::after { content: ''; position: absolute; top: -5px; left: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 14px var(--gold); }
+  .alt-fill { position: absolute; left: 0; bottom: 0; width: 100%; height: 0; background: linear-gradient(to top, var(--green), var(--green-lt)); border-radius: 2px; }
+  .alt-fill::after { content: ''; position: absolute; top: -5px; left: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--green-lt); box-shadow: 0 0 14px var(--green-lt); }
   .alt-read { display: flex; flex-direction: column; gap: 4px; min-width: 120px; }
   .alt-read small { font-size: 11px; letter-spacing: .2em; color: var(--muted); }
   .alt-read strong { font-size: 26px; font-weight: 500; letter-spacing: -.02em; }
-  .alt-read em { font-style: normal; font-size: 11px; color: var(--gold); letter-spacing: .1em; text-transform: uppercase; }
+  .alt-read em { font-style: normal; font-size: 11px; color: var(--green-lt); letter-spacing: .1em; text-transform: uppercase; }
   .coords { position: absolute; left: max(24px, calc((100vw - 1200px) / 2 + 24px)); bottom: 5vh; z-index: 3; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .12em; }
 
   /* ---------- SECTIONS ---------- */
@@ -164,12 +163,12 @@
   }
   .card::before {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 0%), rgba(255,154,106,.14), transparent 45%);
+    background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 0%), rgba(0, 200, 5, .14), transparent 45%);
     opacity: 0; transition: opacity .4s;
   }
-  .card:hover { transform: translateY(-10px); border-color: rgba(255,196,107,.35); box-shadow: 0 30px 60px -30px rgba(255,122,89,.45); }
+  .card:hover { transform: translateY(-10px); border-color: rgba(91, 255, 106, .35); box-shadow: 0 30px 60px -30px rgba(0, 200, 5, .45); }
   .card:hover::before { opacity: 1; }
-  .card .num { font-family: var(--mono); font-size: 13px; color: var(--gold); letter-spacing: .1em; }
+  .card .num { font-family: var(--mono); font-size: 13px; color: var(--green-lt); letter-spacing: .1em; }
   .card .icon { width: 58px; height: 58px; margin: 28px 0 24px; }
   .card h3 { font-family: var(--display); font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 12px; }
   .card p { color: var(--muted); font-size: 16px; }
@@ -182,20 +181,20 @@
   .project .art { position: absolute; inset: -8%; transition: transform .9s var(--ease); will-change: transform; }
   .project:hover .art { transform: scale(1.06); }
   .project .art svg { width: 100%; height: 100%; display: block; }
-  .project .meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 28px; background: linear-gradient(transparent, rgba(7,11,29,.92)); display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+  .project .meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 28px; background: linear-gradient(transparent, rgba(5, 5, 5, .92)); display: flex; justify-content: space-between; align-items: end; gap: 16px; }
   .project h3 { font-family: var(--display); font-size: 24px; font-weight: 700; }
   .project small { font-family: var(--mono); color: var(--muted); font-size: 12px; letter-spacing: .08em; }
   .project .arrow { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); display: grid; place-items: center; flex-shrink: 0; transition: background .35s, transform .45s var(--ease); }
-  .project:hover .arrow { background: var(--gold); color: var(--bg); transform: rotate(-45deg); }
+  .project:hover .arrow { background: var(--green-lt); color: var(--bg); transform: rotate(-45deg); }
 
   /* Contacto */
   .contact-box {
     border-radius: 32px; padding: 72px; position: relative; overflow: hidden;
-    background: linear-gradient(140deg, #141b44, #0b1029 60%);
+    background: linear-gradient(140deg, #171717, #0a0a0a 60%);
     border: 1px solid var(--line);
     display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
   }
-  .contact-box .glow { position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; background: radial-gradient(circle, rgba(255,122,89,.35), transparent 65%); pointer-events: none; }
+  .contact-box .glow { position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; background: radial-gradient(circle, rgba(0, 200, 5, .35), transparent 65%); pointer-events: none; }
   .contact-box h2 { font-family: var(--display); font-size: clamp(36px, 4.6vw, 60px); line-height: 1; letter-spacing: -.03em; margin: 14px 0 22px; }
   .contact-box > div > p { color: var(--muted); margin-bottom: 34px; }
   .contact-list { list-style: none; display: grid; gap: 18px; }
@@ -211,9 +210,9 @@
   }
   .field textarea { min-height: 130px; resize: vertical; }
   .field label { position: absolute; left: 18px; top: 16px; color: var(--muted); font-size: 15px; pointer-events: none; transition: all .25s var(--ease); }
-  .field input:focus, .field textarea:focus { border-color: var(--gold); background: rgba(255,255,255,.07); }
+  .field input:focus, .field textarea:focus { border-color: var(--green-lt); background: rgba(255,255,255,.07); }
   .field input:focus + label, .field input:not(:placeholder-shown) + label,
-  .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { top: 7px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+  .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { top: 7px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--green-lt); }
   form .btn { justify-self: start; margin-top: 6px; }
 
   footer { padding: 70px 0 40px; border-top: 1px solid var(--line); margin-top: 140px; }
@@ -235,7 +234,7 @@
   @media (max-width: 760px) {
     .nav ul, .nav .btn { display: none; }
     .burger { display: block; }
-    .nav.open ul { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; padding: 24px; gap: 22px; background: rgba(7,11,29,.96); border-bottom: 1px solid var(--line); }
+    .nav.open ul { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; padding: 24px; gap: 22px; background: rgba(5, 5, 5, .96); border-bottom: 1px solid var(--line); }
     .intro { padding-top: 26vh; }
     .summit { top: 13vh; right: 24px; }
     .summit p { font-size: 17px; }
@@ -264,7 +263,7 @@
       <svg viewBox="0 0 38 26" fill="none" aria-hidden="true">
         <path d="M1 25 L12 9 L17 15 L24 3 L37 25 Z" fill="url(#logoGrad)"/>
         <path d="M21.5 7 L24 3 L26.6 7.4 L24.6 6.4 L23 7.6 Z" fill="#fff"/>
-        <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="38" y2="26" gradientUnits="userSpaceOnUse"><stop stop-color="#ff7a59"/><stop offset="1" stop-color="#ffc46b"/></linearGradient></defs>
+        <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="38" y2="26" gradientUnits="userSpaceOnUse"><stop stop-color="#00C805"/><stop offset="1" stop-color="#5BFF6A"/></linearGradient></defs>
       </svg>
       Nexo Growth
     </a>
@@ -292,21 +291,21 @@
           <stop offset="1" id="sky2"/>
         </linearGradient>
         <radialGradient id="sunGlow">
-          <stop offset="0" stop-color="#ffe2b0" stop-opacity=".9"/>
-          <stop offset=".25" stop-color="#ffb470" stop-opacity=".45"/>
-          <stop offset="1" stop-color="#ff7a59" stop-opacity="0"/>
+          <stop offset="0" stop-color="#e8ffe9" stop-opacity=".9"/>
+          <stop offset=".25" stop-color="#3fe85a" stop-opacity=".45"/>
+          <stop offset="1" stop-color="#00C805" stop-opacity="0"/>
         </radialGradient>
         <radialGradient id="fogGrad">
-          <stop offset="0" stop-color="#dfe6ff" stop-opacity=".5"/>
-          <stop offset="1" stop-color="#dfe6ff" stop-opacity="0"/>
+          <stop offset="0" stop-color="#d9d9d9" stop-opacity=".5"/>
+          <stop offset="1" stop-color="#d9d9d9" stop-opacity="0"/>
         </radialGradient>
         <linearGradient id="snowGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="#ffffff"/>
-          <stop offset="1" stop-color="#b9c4ea"/>
+          <stop offset="1" stop-color="#9aa59c"/>
         </linearGradient>
         <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#ff7a59"/>
-          <stop offset="1" stop-color="#ffd27a"/>
+          <stop offset="0" stop-color="#00C805"/>
+          <stop offset="1" stop-color="#7CFF8A"/>
         </linearGradient>
         <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur stdDeviation="6"/>
@@ -318,7 +317,7 @@
       <g id="stars"></g>
       <g id="sun">
         <circle r="330" fill="url(#sunGlow)"/>
-        <circle r="46" fill="#fff4dc"/>
+        <circle r="46" fill="#f0fff1"/>
       </g>
       <g id="condor"><path d="M-46 3 Q-30 -8 -12 -3 Q-5 -6 0 -8 Q5 -6 12 -3 Q30 -8 46 3 L40 2 L43 5 L36 3 L38 6 Q24 1 11 3 Q5 6 0 8 Q-5 6 -11 3 Q-24 1 -38 6 L-36 3 L-43 5 L-40 2 Z"/></g>
 
@@ -326,10 +325,10 @@
       <g id="L1">
         <path id="L1Path"/>
         <path id="snow" fill="url(#snowGrad)" clip-path="url(#clipL1)"/>
-        <path id="alpenglow" fill="#ff8f6b" clip-path="url(#clipL1)" opacity="0"/>
+        <path id="alpenglow" fill="#00C805" clip-path="url(#clipL1)" opacity="0"/>
         <path id="ridgeGlow" fill="none" stroke="url(#lineGrad)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" opacity=".8"/>
         <path id="ridgeLine" fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="arrowHead" fill="none" stroke="#ffd27a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        <path id="arrowHead" fill="none" stroke="#7CFF8A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
         <g id="nodes"></g>
         <circle id="spark" r="7" fill="#fff" opacity="0"/>
       </g>
@@ -381,7 +380,7 @@
       <p class="eyebrow" data-reveal>Nuestra misión</p>
       <p class="mission-text" id="missionText">Nuestra misión es ayudar a los negocios a mejorar su imagen pública y su funcionamiento digital.</p>
       <svg class="ridge-divider" id="divider" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
-        <defs><linearGradient id="divGrad" x1="0" x2="1"><stop stop-color="#ff7a59" stop-opacity="0"/><stop offset=".5" stop-color="#ff7a59"/><stop offset="1" stop-color="#ffc46b"/></linearGradient></defs>
+        <defs><linearGradient id="divGrad" x1="0" x2="1"><stop stop-color="#00C805" stop-opacity="0"/><stop offset=".5" stop-color="#00C805"/><stop offset="1" stop-color="#5BFF6A"/></linearGradient></defs>
         <path d="M0 70 L140 62 L220 40 L270 52 L360 22 L420 44 L520 30 L560 12 L610 38 L700 26 L780 48 L860 20 L900 6 L950 34 L1040 40 L1120 18 L1200 4"/>
       </svg>
     </div>
@@ -400,7 +399,7 @@
       <div class="services">
         <article class="card" data-reveal style="--d:0s">
           <span class="num">01</span>
-          <svg class="icon" viewBox="0 0 58 58" fill="none" stroke="url(#lineGrad2)" stroke-width="2"><defs><linearGradient id="lineGrad2" x1="0" y1="0" x2="58" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#ff7a59"/><stop offset="1" stop-color="#ffc46b"/></linearGradient></defs><rect x="5" y="10" width="48" height="36" rx="5"/><path d="M5 19h48M12 14.5h.01M17 14.5h.01M14 38l9-10 6 6 5-5 10 9"/></svg>
+          <svg class="icon" viewBox="0 0 58 58" fill="none" stroke="url(#lineGrad2)" stroke-width="2"><defs><linearGradient id="lineGrad2" x1="0" y1="0" x2="58" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#00C805"/><stop offset="1" stop-color="#5BFF6A"/></linearGradient></defs><rect x="5" y="10" width="48" height="36" rx="5"/><path d="M5 19h48M12 14.5h.01M17 14.5h.01M14 38l9-10 6 6 5-5 10 9"/></svg>
           <h3>Páginas web</h3>
           <p><span class="ph">[DESCRIPCIÓN DEL SERVICIO]</span></p>
           <div class="price"><span>Desde</span><strong class="ph">[PRECIO]</strong></div>
@@ -447,9 +446,9 @@
           <h2>Empieza<br>el <span class="grad-text">ascenso.</span></h2>
           <p>Cuéntanos sobre tu negocio y te respondemos con una propuesta.</p>
           <ul class="contact-list">
-            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffc46b" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><small>Email</small><span class="ph">[TU EMAIL AQUÍ]</span></div></li>
-            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffc46b" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><div><small>Teléfono / WhatsApp</small><span class="ph">[TU TELÉFONO AQUÍ]</span></div></li>
-            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffc46b" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small>Ubicación</small><span class="ph">[CIUDAD / DIRECCIÓN]</span></div></li>
+            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5BFF6A" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><small>Email</small><span class="ph">[TU EMAIL AQUÍ]</span></div></li>
+            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5BFF6A" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><div><small>Teléfono / WhatsApp</small><span class="ph">[TU TELÉFONO AQUÍ]</span></div></li>
+            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5BFF6A" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small>Ubicación</small><span class="ph">[CIUDAD / DIRECCIÓN]</span></div></li>
           </ul>
         </div>
         <!-- Para que el formulario envíe emails, cambia el action por tu servicio (Formspree, Netlify Forms...) -->
@@ -561,9 +560,9 @@
     const g = document.createElementNS(NS, 'g');
     g.setAttribute('transform', `translate(${best[0]} ${best[1]})`);
     g.style.opacity = 0;
-    g.innerHTML = `<circle r="14" fill="none" stroke="#ffd27a" stroke-opacity=".5"/><circle r="5.5" fill="#fff"/>
+    g.innerHTML = `<circle r="14" fill="none" stroke="#7CFF8A" stroke-opacity=".5"/><circle r="5.5" fill="#fff"/>
       <g class="lbl"><text y="-28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#fff" fill-opacity=".85" letter-spacing="1">${p.name.toUpperCase()}</text>
-      <text y="-12" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#ffd27a">${p.alt} m</text></g>`;
+      <text y="-12" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#7CFF8A">${p.alt} m</text></g>`;
     $('nodes').appendChild(g);
     nodes.push({ el: g, lbl: g.querySelector(".lbl"), at: cum[bi] / TOTAL });
   });
@@ -603,15 +602,15 @@
 
   /* ---------- paletas: noche → alba → mañana dorada ---------- */
   const SKY = [
-    [{ at: 0, c: '#04071a' }, { at: .45, c: '#1d1748' }, { at: 1, c: '#13285e' }],
-    [{ at: 0, c: '#0e1440' }, { at: .45, c: '#7a3a6e' }, { at: 1, c: '#e0745c' }],
-    [{ at: 0, c: '#1d2560' }, { at: .45, c: '#f08a5d' }, { at: 1, c: '#ffcf8a' }]
+    [{ at: 0, c: '#000000' }, { at: .45, c: '#050806' }, { at: 1, c: '#07120a' }],
+    [{ at: 0, c: '#060606' }, { at: .45, c: '#0c1f10' }, { at: 1, c: '#0f3d18' }],
+    [{ at: 0, c: '#0b0b0b' }, { at: .45, c: '#0a7a1e' }, { at: 1, c: '#1fb83c' }]
   ];
   const LAYERS = [
-    { el: $('L1'), lift: 30, c: [{ at: 0, c: '#2b3566' }, { at: .5, c: '#5a4a7c' }, { at: 1, c: '#6d5a86' }] },
-    { el: $('L2'), lift: 140, c: [{ at: 0, c: '#1b2250' }, { at: .5, c: '#3a2f5e' }, { at: 1, c: '#46365f' }] },
-    { el: $('L3'), lift: 300, c: [{ at: 0, c: '#11173b' }, { at: .5, c: '#231d44' }, { at: 1, c: '#2a2046' }] },
-    { el: $('L4'), lift: 560, c: [{ at: 0, c: '#070b1d' }, { at: .5, c: '#0d0c22' }, { at: 1, c: '#100d24' }] }
+    { el: $('L1'), lift: 30, c: [{ at: 0, c: '#1f1f1f' }, { at: .5, c: '#262a27' }, { at: 1, c: '#2b302c' }] },
+    { el: $('L2'), lift: 140, c: [{ at: 0, c: '#161616' }, { at: .5, c: '#1a1d1b' }, { at: 1, c: '#1d211e' }] },
+    { el: $('L3'), lift: 300, c: [{ at: 0, c: '#0e0e0e' }, { at: .5, c: '#111312' }, { at: 1, c: '#131614' }] },
+    { el: $('L4'), lift: 560, c: [{ at: 0, c: '#050505' }, { at: .5, c: '#060606' }, { at: 1, c: '#080808' }] }
   ];
   const fogs = [...document.querySelectorAll('.fog')];
   const fogBase = fogs.map(f => +f.getAttribute('cx'));
@@ -717,7 +716,7 @@
   addEventListener('scroll', missionScroll, { passive: true }); missionScroll();
 
   /* ---------- proyectos (placeholders con paisajes generativos) ---------- */
-  const PALS = [['#2a1b4d', '#ff7a59', '#ffc46b'], ['#0f2a3d', '#4fa3a5', '#d9f0c9'], ['#1b1340', '#a368d9', '#ffb3c7']];
+  const PALS = [['#0a0a0a', '#00C805', '#7CFF8A'], ['#111111', '#1f5f2b', '#c8ffd0'], ['#161616', '#3a3a3a', '#00C805']];
   $('projects').innerHTML = PALS.map((pal, i) => {
     const r = rng(100 + i);
     const layer = (base, amp, col, op) => { let d = 'M0 400'; for (let x = 0; x <= 600; x += 20) d += ` L${x} ${(base - r() * amp).toFixed(0)}`; return `<path d="${d} L600 400Z" fill="${col}" opacity="${op}"/>`; };
@@ -725,7 +724,7 @@
       <div class="art" data-parallax="${(i + 1) * 0.04}"><svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice">
         <defs><linearGradient id="pg${i}" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${pal[0]}"/><stop offset="1" stop-color="${pal[1]}"/></linearGradient></defs>
         <rect width="600" height="400" fill="url(#pg${i})"/><circle cx="${380 - i * 80}" cy="150" r="46" fill="${pal[2]}" opacity=".9"/>
-        ${layer(260, 110, pal[0], .55)}${layer(320, 70, pal[0], .8)}${layer(370, 40, '#070b1d', 1)}
+        ${layer(260, 110, pal[0], .55)}${layer(320, 70, pal[0], .8)}${layer(370, 40, '#050505', 1)}
       </svg></div>
       <div class="meta"><div><small>[TIPO DE PROYECTO]</small><h3>[PROYECTO ${i + 1}]</h3></div>
       <span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
