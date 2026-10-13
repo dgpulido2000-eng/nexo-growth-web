@@ -202,12 +202,26 @@
   .range i { flex: 1; height: 1px; position: relative; background: linear-gradient(90deg, rgba(91,255,106,.1), var(--green-lt)); }
   .range i::after { content: ''; position: absolute; right: -1px; top: -3px; width: 7px; height: 7px; border-radius: 50%; background: var(--green-lt); box-shadow: 0 0 12px var(--green-lt); }
   .range span:last-child { color: var(--ink); }
-  .service-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 22px; }
-  .note { padding: 40px 36px; border-radius: 22px; border: 1px solid var(--line); display: flex; flex-direction: column; align-items: flex-start; }
-  .note small { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--green-lt); }
-  .note h3 { font-family: var(--display); font-size: clamp(24px, 2.3vw, 32px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin: 16px 0 14px; }
-  .note p { color: var(--muted); font-size: 16px; max-width: 460px; }
-  .note .btn { margin-top: 28px; }
+
+  /* Proceso */
+  .process { padding-top: 40px; }
+  .steps { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; position: relative; padding-top: 44px; }
+  .steps::before, .steps::after { content: ''; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--line); }
+  .steps::after { background: linear-gradient(90deg, var(--green), var(--green-lt)); transform: scaleX(0); transform-origin: left; transition: transform 1.8s var(--ease) .2s; }
+  .steps.in::after { transform: scaleX(1); }
+  .step { position: relative; opacity: 0; transform: translateY(16px); transition: opacity .7s ease var(--d), transform .8s var(--ease) var(--d); }
+  .steps.in .step { opacity: 1; transform: none; }
+  .step i { position: absolute; top: -44px; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 1px solid var(--green-lt); }
+  .step i::after { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--green-lt); box-shadow: 0 0 10px var(--green-lt); }
+  .step small { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; color: var(--green-lt); }
+  .step h3 { font-family: var(--display); font-size: 22px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; margin: 12px 0 10px; }
+  .step p { color: var(--muted); font-size: 15px; }
+  .process-close { display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 110px; }
+  .process-close .stem { position: relative; width: 1px; height: 90px; margin-bottom: 40px; background: linear-gradient(transparent, var(--green-lt)); }
+  .process-close .stem::after { content: ''; position: absolute; left: -4px; bottom: -4px; width: 9px; height: 9px; border-radius: 50%; background: var(--green-lt); box-shadow: 0 0 16px 2px var(--green-lt); }
+  .process-close .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .process-close h3 { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 3.2vw, 46px); line-height: 1.14; letter-spacing: -.025em; margin: 22px 0 26px; max-width: 1100px; text-wrap: balance; }
+  .process-close .sub { color: var(--muted); font-size: 17px; max-width: 640px; margin-bottom: 38px; }
 
   /* Proyectos */
   .projects { display: grid; grid-template-columns: 1.4fr 1fr; grid-auto-rows: 300px; gap: 22px; }
@@ -262,7 +276,11 @@
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 960px) {
     .services { grid-template-columns: 1fr; }
-    .service-notes { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; padding-top: 0; padding-left: 40px; gap: 40px; max-width: 560px; }
+    .steps::before, .steps::after { top: 0; bottom: 0; left: 7px; right: auto; width: 1px; height: auto; }
+    .steps::after { transform: scaleY(0); transform-origin: top; }
+    .steps.in::after { transform: scaleY(1); }
+    .step i { top: 2px; left: -40px; }
     .projects { grid-template-columns: 1fr; grid-auto-rows: 260px; }
     .project:first-child { grid-row: span 1; }
     .contact-box { grid-template-columns: 1fr; padding: 44px 28px; gap: 44px; }
@@ -286,6 +304,7 @@
     .ascent { height: 100vh; }
     [data-reveal] { opacity: 1; transform: none; transition: none; }
     .conv .line, .conv .area, .conv .node { transition: none; }
+    .steps::after, .step { transition: none; }
     .scroll-hint { display: none; }
     html { scroll-behavior: auto; }
   }
@@ -308,6 +327,7 @@
     <ul id="menu">
       <li><a href="#mision">Misión</a></li>
       <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proceso">Proceso</a></li>
       <li><a href="#proyectos">Proyectos</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -480,21 +500,33 @@
           <div class="fit"><span>Ideal para</span><strong>Todo en un solo lugar</strong></div>
         </article>
       </div>
+    </div>
+  </section>
 
-      <div class="service-notes">
-        <div class="note" data-reveal>
-          <small>Cómo trabajamos</small>
-          <h3>Por cotización, no con precios fijos.</h3>
-          <p>Cada negocio es distinto. Nos cuentas qué necesitas y preparamos una cotización a la medida de tu proyecto.</p>
-          <a href="#contacto" class="btn">Solicitar cotización
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+  <!-- ============ PROCESO ============ -->
+  <section class="block process" id="proceso">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal>Proceso</p>
+          <h2 data-reveal style="--d:.08s">Cómo<br>trabajamos.</h2>
         </div>
-        <div class="note" data-reveal style="--d:.12s">
-          <small>Nuestro compromiso</small>
-          <h3>Tu satisfacción, <span class="grad-text">en cada detalle.</span></h3>
-          <p>Nuestro equipo trabaja para que quedes completamente satisfecho con el resultado. Por eso nos fijamos en los pequeños detalles que marcan la diferencia.</p>
-        </div>
+        <p data-reveal style="--d:.16s">Un proceso claro y sencillo, para que sepas en todo momento cuál es el siguiente paso.</p>
+      </div>
+      <ol class="steps" data-reveal>
+        <li class="step" style="--d:.2s"><i></i><small>01</small><h3>Nos cuentas tu idea</h3><p>Hablamos sobre tu negocio, tus objetivos y lo que necesitas que haga tu web.</p></li>
+        <li class="step" style="--d:.55s"><i></i><small>02</small><h3>Recibes tu cotización</h3><p>Con esa información preparamos una cotización a la medida de tu proyecto.</p></li>
+        <li class="step" style="--d:.9s"><i></i><small>03</small><h3>Diseñamos tu web</h3><p>Creamos tu web cuidando cada detalle y la ajustamos contigo hasta que estés completamente satisfecho.</p></li>
+        <li class="step" style="--d:1.25s"><i></i><small>04</small><h3>Lanzamos</h3><p>Publicamos tu web y queda lista para recibir a tus clientes.</p></li>
+      </ol>
+      <div class="process-close" data-reveal>
+        <span class="stem" aria-hidden="true"></span>
+        <p class="kicker">Sin precios fijos · Sin detalles al azar</p>
+        <h3>Cada proyecto, cotizado a tu medida.<br><span class="grad-text">Cada detalle, cuidado hasta el final.</span></h3>
+        <p class="sub">Cada negocio es distinto, por eso trabajamos por cotización y no con precios fijos. Nuestro equipo trabaja para que quedes completamente satisfecho, y por eso nos fijamos en los pequeños detalles que marcan la diferencia.</p>
+        <a href="#contacto" class="btn">Solicitar cotización
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
   </section>
