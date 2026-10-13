@@ -93,8 +93,7 @@
   .ascent-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 22vh; background: linear-gradient(transparent, var(--bg)); pointer-events: none; z-index: 2; }
 
   .intro, .summit { position: absolute; z-index: 3; will-change: transform, opacity; }
-  .intro { inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 22vh; text-align: center; pointer-events: none; }
-  .intro .eyebrow { margin-bottom: 22px; }
+  .intro { inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 30vh; text-align: center; pointer-events: none; }
   .intro h1 {
     font-family: 'Sora', sans-serif; font-weight: 700;
     font-size: clamp(56px, 12vw, 190px);
@@ -102,6 +101,11 @@
     text-shadow: 0 10px 60px rgba(0,0,0,.4);
   }
   .intro h1 span { display: inline-block; will-change: transform; }
+  .slogan {
+    margin-top: 26px; font-family: var(--body); font-weight: 500;
+    font-size: clamp(15px, 1.6vw, 22px); letter-spacing: .32em; text-transform: uppercase;
+    color: rgba(245, 245, 245, .88); text-shadow: 0 2px 20px rgba(0,0,0,.7);
+  }
   .scroll-hint {
     position: absolute; left: 50%; bottom: 6vh; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 12px;
@@ -235,7 +239,7 @@
     .nav ul, .nav .btn { display: none; }
     .burger { display: block; }
     .nav.open ul { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; padding: 24px; gap: 22px; background: rgba(5, 5, 5, .96); border-bottom: 1px solid var(--line); }
-    .intro { padding-top: 26vh; }
+    .intro { padding-top: 32vh; }
     .summit { top: 13vh; right: 24px; }
     .summit p { font-size: 17px; }
     .altimeter { top: auto; bottom: 5vh; transform: none; }
@@ -343,8 +347,8 @@
     </svg>
 
     <div class="intro" id="intro">
-      <p class="eyebrow">Agencia de páginas web · Inspirada en los Andes</p>
       <h1 id="introTitle"><span>Nexo</span> <span class="grad-text">Growth</span></h1>
+      <p class="slogan">Soluciones sin límites</p>
       <div class="scroll-hint" id="hint">Desliza para ascender<i></i></div>
     </div>
 
@@ -529,7 +533,7 @@
   // nieve: todo lo que quede por encima de una línea de nieve irregular
   (function () {
     const n = noise(3); let d = 'M-260 -10';
-    for (let x = -260; x <= 1860; x += 10) d += ' L' + x + ' ' + (470 + n(x * .03) * 42 + Math.abs(n(x * .11)) * 26).toFixed(1);
+    for (let x = -260; x <= 1860; x += 10) d += ' L' + x + ' ' + (405 + n(x * .03) * 30 + Math.abs(n(x * .11)) * 24).toFixed(1);
     d += ' L1860 -10 Z';
     $('snow').setAttribute('d', d); $('alpenglow').setAttribute('d', d);
   })();
@@ -580,22 +584,48 @@
     $('stars').appendChild(frag);
   })();
 
-  // frailejones (Espeletia), la planta emblema del páramo merideño
+  // frailejones (Espeletia), la planta emblema del páramo merideño:
+  // tronco grueso cubierto de hojas secas, roseta densa y varas florales
   (function () {
     const r = rng(5); let html = '';
     [[-40, 1.25], [90, .8], [330, 1.05], [470, .65], [700, .9], [1010, .7], [1180, 1.15], [1330, .75], [1520, 1.3], [1640, .9]].forEach(([x, s]) => {
-      const y = yAt(L4, x) + 6, h = (70 + r() * 40) * s, w = 7 * s, lean = (r() - .5) * 10 * s;
-      let d = `M${x - w} ${y} Q${x - w + lean * .5} ${y - h * .5} ${x - w * .8 + lean} ${y - h} L${x + w * .8 + lean} ${y - h} Q${x + w + lean * .5} ${y - h * .5} ${x + w} ${y} Z`;
-      // falda de hojas secas
-      d += ` M${x - w * 1.7 + lean * .7} ${y - h * .72} L${x + lean * .9} ${y - h * 1.02} L${x + w * 1.7 + lean * .7} ${y - h * .72} Z`;
-      const cx = x + lean, cy = y - h;
-      for (let i = 0; i < 17; i++) {
-        const a = -Math.PI * (.06 + .88 * i / 16) + (r() - .5) * .12, len = (24 + r() * 12) * s, bw = 3.2 * s;
-        const tx = cx + Math.cos(a) * len, ty = cy + Math.sin(a) * len;
-        const nx = -Math.sin(a) * bw, ny = Math.cos(a) * bw;
-        d += ` M${cx} ${cy} Q${cx + Math.cos(a) * len * .5 + nx} ${cy + Math.sin(a) * len * .5 + ny} ${tx} ${ty} Q${cx + Math.cos(a) * len * .5 - nx} ${cy + Math.sin(a) * len * .5 - ny} ${cx} ${cy}Z`;
+      const y = yAt(L4, x) + 6, h = (48 + r() * 34) * s, w = 6.5 * s, lean = (r() - .5) * 6 * s, segs = 8;
+      // tronco con la "falda" de hojas secas: bordes dentados que cuelgan
+      const L = [], R = [];
+      for (let k = 0; k <= segs; k++) {
+        const t = k / segs, yy = y - h * t, xx = x + lean * t, ww = w * (1 + .45 * t), tooth = (2 + r() * 2.5) * s;
+        L.push(`${(xx - ww).toFixed(1)} ${yy.toFixed(1)}`);
+        R.push(`${(xx + ww).toFixed(1)} ${yy.toFixed(1)}`);
+        if (k < segs) {
+          const ty = yy - h / segs * .35;
+          L.push(`${(xx - ww - tooth).toFixed(1)} ${(yy + 1.5 * s).toFixed(1)} ${(xx - ww * 1.05).toFixed(1)} ${ty.toFixed(1)}`);
+          R.push(`${(xx + ww + tooth).toFixed(1)} ${(yy + 1.5 * s).toFixed(1)} ${(xx + ww * 1.05).toFixed(1)} ${ty.toFixed(1)}`);
+        }
       }
-      html += `<path d="${d}"/>`;
+      let d = `M${L.join(' L')} L${R.reverse().join(' L')} Z`;
+      // roseta: dos capas de hojas anchas y aterciopeladas formando una cúpula
+      const cx = x + lean, cy = y - h;
+      [[26, 15, 5.2, -.1, 1.1], [16, 9, 4.4, .08, .84]].forEach(([n, base, bw0, a0, span]) => {
+        for (let i = 0; i < n; i++) {
+          const a = -Math.PI * (a0 + span * i / (n - 1)) + (r() - .5) * .1;
+          const up = Math.abs(Math.sin(a)), len = (base + up * 7 + r() * 4) * s, bw = bw0 * s;
+          const tx = cx + Math.cos(a) * len, ty = cy + Math.sin(a) * len;
+          const nx = Math.sin(a) * bw, ny = -Math.cos(a) * bw; // mismo sentido de giro que el tronco
+          d += ` M${cx.toFixed(1)} ${cy.toFixed(1)} Q${(cx + Math.cos(a) * len * .55 + nx).toFixed(1)} ${(cy + Math.sin(a) * len * .55 + ny).toFixed(1)} ${tx.toFixed(1)} ${ty.toFixed(1)} Q${(cx + Math.cos(a) * len * .55 - nx).toFixed(1)} ${(cy + Math.sin(a) * len * .55 - ny).toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)}Z`;
+        }
+      });
+      // varas florales con capítulos
+      const nStalks = s > .85 ? 3 : 2; let fl = '';
+      for (let j = 0; j < nStalks; j++) {
+        const ox = (j - (nStalks - 1) / 2) * 7 * s + (r() - .5) * 3 * s, sh = (26 + r() * 16) * s, sx = cx + ox * 1.8, sy = cy - 12 * s - sh, sw = .9 * s;
+        d += ` M${(cx + ox - sw).toFixed(1)} ${(cy - 8 * s).toFixed(1)} Q${(cx + ox * 1.3).toFixed(1)} ${(cy - 12 * s - sh * .5).toFixed(1)} ${(sx - sw).toFixed(1)} ${sy.toFixed(1)} L${(sx + sw).toFixed(1)} ${sy.toFixed(1)} Q${(cx + ox * 1.3 + 2 * sw).toFixed(1)} ${(cy - 12 * s - sh * .5).toFixed(1)} ${(cx + ox + sw).toFixed(1)} ${(cy - 8 * s).toFixed(1)}Z`;
+        [[0, 0, 2.8], [-4.5, 6, 2.2], [4.5, 9, 2.2]].forEach(([fx, fy, fr]) => {
+          const px = sx + fx * s, py = sy + fy * s, rr = fr * s;
+          fl += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${rr.toFixed(1)}"/>`;
+          if (fx) fl += `<path d="M${sx.toFixed(1)} ${(sy + fy * s + 2 * s).toFixed(1)} L${px.toFixed(1)} ${py.toFixed(1)} L${sx.toFixed(1)} ${(sy + fy * s + 3.2 * s).toFixed(1)}Z"/>`;
+        });
+      }
+      html += `<path d="${d}"/>${fl}`;
     });
     $('frailejones').innerHTML = html;
   })();
@@ -606,6 +636,9 @@
     [{ at: 0, c: '#060606' }, { at: .45, c: '#0c1f10' }, { at: 1, c: '#0f3d18' }],
     [{ at: 0, c: '#0b0b0b' }, { at: .45, c: '#0a7a1e' }, { at: 1, c: '#1fb83c' }]
   ];
+  // al inicio sube las cordilleras (más la del fondo) para que el título quede sobre la roca oscura;
+  // con el scroll vuelven a su sitio para que la cima final no se corte
+  const RAISE = [130, 85, 40, 0], FOG_RAISE = [50, 30, 20, 0];
   const LAYERS = [
     { el: $('L1'), lift: 30, c: [{ at: 0, c: '#1f1f1f' }, { at: .5, c: '#262a27' }, { at: 1, c: '#2b302c' }] },
     { el: $('L2'), lift: 140, c: [{ at: 0, c: '#161616' }, { at: .5, c: '#1a1d1b' }, { at: 1, c: '#1d211e' }] },
@@ -643,7 +676,7 @@
     $('sun').setAttribute('opacity', smooth(.1, .35, p).toFixed(3));
 
     LAYERS.forEach((L, i) => {
-      L.el.setAttribute('transform', `translate(${(mxCur * -(i + 1) * 7).toFixed(1)} ${(L.lift * e).toFixed(1)})`);
+      L.el.setAttribute('transform', `translate(${(mxCur * -(i + 1) * 7).toFixed(1)} ${(L.lift * e - RAISE[i] * (1 - e)).toFixed(1)})`);
       L.el.setAttribute('fill', keyed(L.c, p));
     });
     $('alpenglow').setAttribute('opacity', (Math.sin(Math.PI * smooth(.2, .95, p)) * .55 + smooth(.8, 1, p) * .2).toFixed(3));
@@ -651,7 +684,7 @@
     fogs.forEach((f, i) => {
       const sp = +f.dataset.speed;
       f.setAttribute('cx', (fogBase[i] + sp * p * 500 + Math.sin(time * .15 + i) * 30).toFixed(1));
-      f.setAttribute('transform', `translate(0 ${(LAYERS[Math.min(i, 3)].lift * e * .85).toFixed(1)})`);
+      f.setAttribute('transform', `translate(0 ${(LAYERS[Math.min(i, 3)].lift * e * .85 - FOG_RAISE[Math.min(i, 3)] * (1 - e)).toFixed(1)})`);
       f.setAttribute('opacity', (1 - smooth(.6, 1, p) * .6).toFixed(3));
     });
 
