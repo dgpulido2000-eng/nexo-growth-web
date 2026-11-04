@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexo Growth — Agencia de páginas web</title>
-<meta name="description" content="Nexo Growth: ayudamos a negocios a mejorar su imagen pública y su funcionamiento digital.">
+<title>Nexo Growth — Web design agency</title>
+<meta name="description" content="Nexo Growth: we help businesses improve their public image and their digital operations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Sora:wght@700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -64,7 +64,7 @@
     border-color: var(--line);
   }
   .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: -.01em; }
+  .logo { display: flex; align-items: center; gap: 10px; white-space: nowrap; font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: -.01em; }
   .logo svg { width: 38px; height: 26px; }
   .nav ul { display: flex; gap: 34px; list-style: none; font-size: 15px; font-weight: 500; }
   .nav ul a { color: var(--muted); transition: color .25s; position: relative; }
@@ -85,6 +85,12 @@
   .btn.ghost:hover { background: rgba(255,255,255,.12); }
   .nav .btn { padding: 10px 20px; font-size: 14px; }
   .burger { display: none; background: none; border: 0; color: var(--ink); cursor: pointer; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .lang { display: flex; padding: 3px; border-radius: 100px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); }
+  .lang button { min-width: 38px; padding: 6px 9px; border: 0; border-radius: 100px; background: none; color: var(--muted); font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .06em; cursor: pointer; transition: background .25s, color .25s; }
+  .lang button:hover { color: var(--ink); }
+  .lang button[aria-pressed="true"] { background: var(--grad); color: #000000; }
+  .lang button:focus-visible { outline: 2px solid var(--green-lt); outline-offset: 2px; }
 
   /* ---------- HERO (scroll-driven ascent) ---------- */
   .ascent { height: 460vh; position: relative; }
@@ -289,6 +295,10 @@
   @media (max-width: 760px) {
     .nav ul, .nav .btn { display: none; }
     .burger { display: block; }
+    .logo { font-size: 17px; gap: 8px; }
+    .logo svg { width: 30px; height: 20px; }
+    .nav-right { gap: 8px; }
+    .lang button { min-width: 32px; padding: 5px 6px; font-size: 11px; }
     .nav.open ul { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; padding: 24px; gap: 22px; background: rgba(5, 5, 5, .96); border-bottom: 1px solid var(--line); }
     .intro { padding-top: 32vh; }
     .summit { top: 13vh; right: 24px; }
@@ -299,6 +309,10 @@
     .alt-read strong { font-size: 20px; }
     .coords { display: none; }
     section.block { padding: 100px 0; }
+  }
+  @media (max-width: 360px) {
+    .nav .wrap { padding: 0 14px; }
+    .logo { font-size: 15px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .ascent { height: 100vh; }
@@ -316,7 +330,7 @@
 <nav class="nav" id="nav">
   <div class="wrap">
     <!-- Logo provisional: sustitúyelo por tu archivo, p. ej. <img src="assets/logo.svg" alt="Nexo Growth" height="30"> -->
-    <a href="#top" class="logo" aria-label="Nexo Growth, inicio">
+    <a href="#top" class="logo" aria-label="Nexo Growth, home">
       <svg viewBox="0 0 38 26" fill="none" aria-hidden="true">
         <path d="M1 25 L12 9 L17 15 L24 3 L37 25 Z" fill="url(#logoGrad)"/>
         <path d="M21.5 7 L24 3 L26.6 7.4 L24.6 6.4 L23 7.6 Z" fill="#fff"/>
@@ -325,16 +339,22 @@
       Nexo Growth
     </a>
     <ul id="menu">
-      <li><a href="#mision">Misión</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#proceso">Proceso</a></li>
-      <li><a href="#proyectos">Proyectos</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+      <li><a data-i18n="navMission" href="#mision">Mission</a></li>
+      <li><a data-i18n="navServices" href="#servicios">Services</a></li>
+      <li><a data-i18n="navProcess" href="#proceso">Process</a></li>
+      <li><a data-i18n="navProjects" href="#proyectos">Projects</a></li>
+      <li><a data-i18n="navContact" href="#contacto">Contact</a></li>
     </ul>
-    <a href="#contacto" class="btn">Hablemos</a>
-    <button class="burger" id="burger" aria-label="Abrir menú">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
-    </button>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language / Idioma">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <a data-i18n="navTalk" href="#contacto" class="btn">Let's talk</a>
+      <button class="burger" id="burger" aria-label="Open menu">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -402,31 +422,31 @@
 
     <div class="intro" id="intro">
       <h1 id="introTitle"><span>Nexo</span> <span class="grad-text">Growth</span></h1>
-      <p class="slogan">Soluciones sin límites</p>
-      <div class="scroll-hint" id="hint">Desliza para ascender<i></i></div>
+      <p data-i18n="slogan" class="slogan">Limitless solutions</p>
+      <div class="scroll-hint" id="hint"><span data-i18n="hint">Scroll to ascend</span><i></i></div>
     </div>
 
     <div class="summit" id="summit">
-      <p class="eyebrow">De la base a la cima</p>
-      <h2>Llevamos tu negocio <span class="grad-text">a lo más alto.</span></h2>
-      <p>Ayudamos a negocios a mejorar su imagen pública y su funcionamiento digital.</p>
+      <p data-i18n="summitEye" class="eyebrow">From base to summit</p>
+      <h2 data-i18n="summitTitle">We take your business <span class="grad-text">to the top.</span></h2>
+      <p data-i18n="tagline">We help businesses improve their public image and their digital operations.</p>
       <div class="ctas">
-        <a href="#contacto" class="btn">Hablemos de tu proyecto
+        <a href="#contacto" class="btn"><span data-i18n="ctaTalk">Let's talk about your project</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#servicios" class="btn ghost">Ver servicios</a>
+        <a data-i18n="ctaServices" href="#servicios" class="btn ghost">View services</a>
       </div>
     </div>
 
     <div class="altimeter" aria-hidden="true">
       <div class="alt-track"><div class="alt-fill" id="altFill"></div></div>
       <div class="alt-read">
-        <small>ALTITUD</small>
-        <strong id="altNum">1.600 m</strong>
+        <small data-i18n="altitude">ALTITUDE</small>
+        <strong id="altNum">1,600 m</strong>
         <em id="altLabel">Mérida</em>
       </div>
     </div>
-    <div class="coords" aria-hidden="true">8°32′N · 71°03′O — Sierra Nevada de Mérida</div>
+    <div data-i18n="coords" class="coords" aria-hidden="true">8°32′N · 71°03′W — Sierra Nevada de Mérida</div>
     <div class="ascent-fade"></div>
   </div>
 </header>
@@ -435,26 +455,26 @@
   <!-- ============ MISIÓN ============ -->
   <section class="block mission" id="mision">
     <div class="wrap">
-      <p class="eyebrow" data-reveal>Nuestra misión</p>
-      <p class="mission-text" id="missionText">Nuestra misión es ayudar a los negocios a mejorar su imagen pública y su funcionamiento digital.</p>
+      <p data-i18n="missionEye" class="eyebrow" data-reveal>Our mission</p>
+      <p class="mission-text" id="missionText"></p>
       <div class="mission-more">
         <div>
-          <p class="lead" data-reveal>Creamos páginas web para negocios que no solo quieren mejorar su <strong>presencia digital</strong>, sino también su <strong>conversión</strong>.</p>
-          <p class="lead" data-reveal style="--d:.1s">Ofrecemos soluciones confiables y sin límites para que nuestros clientes alcancen sus objetivos de forma <strong>predecible y eficiente</strong>.</p>
-          <ul class="pillars" data-reveal style="--d:.2s"><li>Confiable</li><li>Predecible</li><li>Eficiente</li></ul>
+          <p data-i18n="lead1" class="lead" data-reveal>We build websites for businesses that want to improve not only their <strong>digital presence</strong>, but also their <strong>conversion</strong>.</p>
+          <p data-i18n="lead2" class="lead" data-reveal style="--d:.1s">We offer reliable, limitless solutions so our clients reach their goals in a <strong>predictable and efficient</strong> way.</p>
+          <ul class="pillars" data-reveal style="--d:.2s"><li data-i18n="pillar1">Reliable</li><li data-i18n="pillar2">Predictable</li><li data-i18n="pillar3">Efficient</li></ul>
         </div>
-        <svg class="conv" data-reveal viewBox="0 0 520 340" aria-label="De visitas a clientes: presencia digital que se convierte en resultados" role="img">
+        <svg class="conv" data-reveal viewBox="0 0 520 340" aria-label="From visitors to customers: digital presence that turns into results" role="img">
           <defs>
             <linearGradient id="convLine" x1="0" x2="1"><stop stop-color="#00C805"/><stop offset="1" stop-color="#7CFF8A"/></linearGradient>
             <linearGradient id="convArea" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#00C805" stop-opacity=".16"/><stop offset="1" stop-color="#00C805" stop-opacity="0"/></linearGradient>
           </defs>
           <g class="grid"><path d="M20 90H500M20 170H500M20 250H500"/></g>
-          <text class="cap" x="20" y="30">PRESENCIA → CONVERSIÓN</text>
+          <text data-i18n="chartCap" class="cap" x="20" y="30">PRESENCE → CONVERSION</text>
           <path class="area" d="M20 300 C110 292 170 250 240 200 S380 92 500 60 V320 H20 Z" fill="url(#convArea)"/>
           <path class="line" d="M20 300 C110 292 170 250 240 200 S380 92 500 60" pathLength="1"/>
-          <g class="node" style="--d:.5s" transform="translate(90 288)"><circle r="12"/><circle class="dot" r="4.5"/><text y="-22">VISITAS</text></g>
-          <g class="node" style="--d:.9s" transform="translate(255 189)"><circle r="12"/><circle class="dot" r="4.5"/><text y="-22">INTERÉS</text></g>
-          <g class="node" style="--d:1.3s" transform="translate(470 68)"><circle r="12"/><circle class="dot" r="4.5"/><text y="-22">CLIENTES</text></g>
+          <g class="node" style="--d:.5s" transform="translate(90 288)"><circle r="12"/><circle class="dot" r="4.5"/><text data-i18n="chart1" y="-22">VISITORS</text></g>
+          <g class="node" style="--d:.9s" transform="translate(255 189)"><circle r="12"/><circle class="dot" r="4.5"/><text data-i18n="chart2" y="-22">INTEREST</text></g>
+          <g class="node" style="--d:1.3s" transform="translate(470 68)"><circle r="12"/><circle class="dot" r="4.5"/><text data-i18n="chart3" y="-22">CUSTOMERS</text></g>
         </svg>
       </div>
       <svg class="ridge-divider" id="divider" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
@@ -469,35 +489,35 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <p class="eyebrow" data-reveal>Servicios</p>
-          <h2 data-reveal style="--d:.08s">Páginas web,<br>a tu medida.</h2>
+          <p data-i18n="navServices" class="eyebrow" data-reveal>Services</p>
+          <h2 data-i18n="servTitle" data-reveal style="--d:.08s">Websites,<br>made for you.</h2>
         </div>
-        <p data-reveal style="--d:.16s">Nos dedicamos a una sola cosa y la hacemos a fondo: crear páginas web. Desde una web informativa sencilla hasta una con pagos y agendamientos completamente integrados.</p>
+        <p data-i18n="servIntro" data-reveal style="--d:.16s">We do one thing and we do it thoroughly: build websites. From a simple informational site to one with fully integrated payments and booking.</p>
       </div>
 
-      <div class="range" data-reveal aria-hidden="true"><span>Esencial</span><i></i><span>Completamente integrada</span></div>
+      <div class="range" data-reveal aria-hidden="true"><span data-i18n="rangeLow">Essential</span><i></i><span data-i18n="card3">Fully integrated</span></div>
 
       <div class="services">
         <article class="card" data-reveal style="--d:0s">
           <span class="num">01</span>
           <svg class="icon" viewBox="0 0 58 58" fill="none" stroke="url(#lineGrad2)" stroke-width="2"><defs><linearGradient id="lineGrad2" x1="0" y1="0" x2="58" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#00C805"/><stop offset="1" stop-color="#5BFF6A"/></linearGradient></defs><rect x="5" y="10" width="48" height="36" rx="5"/><path d="M5 19h48M12 14.5h.01M17 14.5h.01M13 28h20M13 34h14"/></svg>
-          <h3>Web informativa</h3>
-          <p>Para quien ofrece un servicio o un producto sencillo y necesita presentarlo con una imagen profesional: quién eres, qué ofreces y cómo contactarte, claro y bien presentado.</p>
-          <div class="fit"><span>Ideal para</span><strong>Servicios y productos sencillos</strong></div>
+          <h3 data-i18n="card1">Informational website</h3>
+          <p data-i18n="card1p">For anyone offering a service or a simple product who needs to present it with a professional image: who you are, what you offer and how to reach you, clear and well presented.</p>
+          <div class="fit"><span data-i18n="idealFor">Ideal for</span><strong data-i18n="card1fit">Services and simple products</strong></div>
         </article>
         <article class="card" data-reveal style="--d:.12s">
           <span class="num">02</span>
           <svg class="icon" viewBox="0 0 58 58" fill="none" stroke="url(#lineGrad2)" stroke-width="2"><rect x="4" y="11" width="30" height="21" rx="3"/><path d="M4 18h30M9 26h8"/><rect x="26" y="25" width="27" height="25" rx="3" fill="#0d0d0d"/><path d="M26 32h27M33 21v7M46 21v7M33 40l4 4 8-8"/></svg>
-          <h3>Pagos o agendamientos</h3>
-          <p>Para negocios que quieren que su web trabaje por ellos: cobrar en línea o recibir reservas y citas directamente desde la página.</p>
-          <div class="fit"><span>Ideal para</span><strong>Negocios que cobran o agendan</strong></div>
+          <h3 data-i18n="card2">Payments or booking</h3>
+          <p data-i18n="card2p">For businesses that want their website to work for them: take payments online or receive bookings and appointments right from the site.</p>
+          <div class="fit"><span data-i18n="idealFor">Ideal for</span><strong data-i18n="card2fit">Businesses that charge or book</strong></div>
         </article>
         <article class="card" data-reveal style="--d:.24s">
           <span class="num">03</span>
           <svg class="icon" viewBox="0 0 58 58" fill="none" stroke="url(#lineGrad2)" stroke-width="2"><circle cx="29" cy="29" r="7"/><circle cx="10" cy="12" r="5"/><circle cx="48" cy="12" r="5"/><circle cx="10" cy="46" r="5"/><circle cx="48" cy="46" r="5"/><path d="M14 16l10 8M44 16l-10 8M14 42l10-8M44 42l-10-8"/></svg>
-          <h3>Completamente integrada</h3>
-          <p>Pagos y agendamientos funcionando juntos dentro de tu web, para que tus clientes reserven y paguen en un solo lugar, sin pasos de más.</p>
-          <div class="fit"><span>Ideal para</span><strong>Todo en un solo lugar</strong></div>
+          <h3 data-i18n="card3">Fully integrated</h3>
+          <p data-i18n="card3p">Payments and booking working together inside your website, so your customers book and pay in one place, with no extra steps.</p>
+          <div class="fit"><span data-i18n="idealFor">Ideal for</span><strong data-i18n="card3fit">Everything in one place</strong></div>
         </article>
       </div>
     </div>
@@ -508,23 +528,23 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <p class="eyebrow" data-reveal>Proceso</p>
-          <h2 data-reveal style="--d:.08s">Cómo<br>trabajamos.</h2>
+          <p data-i18n="navProcess" class="eyebrow" data-reveal>Process</p>
+          <h2 data-i18n="procTitle" data-reveal style="--d:.08s">How we<br>work.</h2>
         </div>
-        <p data-reveal style="--d:.16s">Un proceso claro y sencillo, para que sepas en todo momento cuál es el siguiente paso.</p>
+        <p data-i18n="procIntro" data-reveal style="--d:.16s">A clear, simple process, so you always know what comes next.</p>
       </div>
       <ol class="steps" data-reveal>
-        <li class="step" style="--d:.2s"><i></i><small>01</small><h3>Nos cuentas tu idea</h3><p>Hablamos sobre tu negocio, tus objetivos y lo que necesitas que haga tu web.</p></li>
-        <li class="step" style="--d:.55s"><i></i><small>02</small><h3>Recibes tu cotización</h3><p>Con esa información preparamos una cotización a la medida de tu proyecto.</p></li>
-        <li class="step" style="--d:.9s"><i></i><small>03</small><h3>Diseñamos tu web</h3><p>Creamos tu web cuidando cada detalle y la ajustamos contigo hasta que estés completamente satisfecho.</p></li>
-        <li class="step" style="--d:1.25s"><i></i><small>04</small><h3>Lanzamos</h3><p>Publicamos tu web y queda lista para recibir a tus clientes.</p></li>
+        <li class="step" style="--d:.2s"><i></i><small>01</small><h3 data-i18n="step1">You share your idea</h3><p data-i18n="step1p">We talk about your business, your goals and what you need your website to do.</p></li>
+        <li class="step" style="--d:.55s"><i></i><small>02</small><h3 data-i18n="step2">You get your quote</h3><p data-i18n="step2p">With that information, we prepare a quote tailored to your project.</p></li>
+        <li class="step" style="--d:.9s"><i></i><small>03</small><h3 data-i18n="step3">We design your website</h3><p data-i18n="step3p">We build your website with care for every detail and adjust it with you until you're completely satisfied.</p></li>
+        <li class="step" style="--d:1.25s"><i></i><small>04</small><h3 data-i18n="step4">We launch</h3><p data-i18n="step4p">We publish your website and it's ready to welcome your customers.</p></li>
       </ol>
       <div class="process-close" data-reveal>
         <span class="stem" aria-hidden="true"></span>
-        <p class="kicker">Sin precios fijos · Sin detalles al azar</p>
-        <h3>Cada proyecto, cotizado a tu medida.<br><span class="grad-text">Cada detalle, cuidado hasta el final.</span></h3>
-        <p class="sub">Cada negocio es distinto, por eso trabajamos por cotización y no con precios fijos. Nuestro equipo trabaja para que quedes completamente satisfecho, y por eso nos fijamos en los pequeños detalles que marcan la diferencia.</p>
-        <a href="#contacto" class="btn">Solicitar cotización
+        <p data-i18n="kicker" class="kicker">No fixed prices · No detail left to chance</p>
+        <h3 data-i18n="closeTitle">Every project, quoted to fit.<br><span class="grad-text">Every detail, cared for to the end.</span></h3>
+        <p data-i18n="closeSub" class="sub">Every business is different, so we work by quote rather than fixed prices. Our team works to make sure you're completely satisfied, which is why we focus on the small details that make the difference.</p>
+        <a href="#contacto" class="btn"><span data-i18n="ctaQuote">Request a quote</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -536,10 +556,10 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <p class="eyebrow" data-reveal>Proyectos</p>
-          <h2 data-reveal style="--d:.08s">Cimas que ya<br>hemos alcanzado.</h2>
+          <p data-i18n="navProjects" class="eyebrow" data-reveal>Projects</p>
+          <h2 data-i18n="projTitle" data-reveal style="--d:.08s">Summits we've<br>already reached.</h2>
         </div>
-        <p data-reveal style="--d:.16s">Negocios reales que ya confían en nosotros.</p>
+        <p data-i18n="projIntro" data-reveal style="--d:.16s">Real businesses that already trust us.</p>
       </div>
       <div class="projects" id="projects"></div>
     </div>
@@ -551,22 +571,22 @@
       <div class="contact-box" data-reveal="scale">
         <div class="glow"></div>
         <div>
-          <p class="eyebrow">Contacto</p>
-          <h2>Empieza<br>el <span class="grad-text">ascenso.</span></h2>
-          <p>Cuéntanos sobre tu negocio y lo que necesitas, y te enviamos una cotización a la medida.</p>
+          <p data-i18n="navContact" class="eyebrow">Contact</p>
+          <h2 data-i18n="contactTitle">Start<br>the <span class="grad-text">ascent.</span></h2>
+          <p data-i18n="contactIntro">Tell us about your business and what you need, and we'll send you a tailored quote.</p>
           <ul class="contact-list">
             <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5BFF6A" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><small>Email</small><a href="mailto:info.nexogrowth@gmail.com">info.nexogrowth@gmail.com</a></div></li>
-            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5BFF6A" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><div><small>Teléfono</small><a href="tel:+17863250746">(786) 325-0746</a><a href="tel:+19546585193">(954) 658-5193</a></div></li>
-            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5BFF6A" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small>Ubicación</small><span>Alpharetta, GA</span></div></li>
+            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#5BFF6A" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span><div><small>WhatsApp</small><a href="https://wa.me/17863250746" target="_blank" rel="noopener">(786) 325-0746</a><a href="https://wa.me/19546585193" target="_blank" rel="noopener">(954) 658-5193</a></div></li>
+            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5BFF6A" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small data-i18n="location">Location</small><span>Alpharetta, GA</span></div></li>
           </ul>
         </div>
         <!-- Para que el formulario envíe emails, cambia el action por tu servicio (Formspree, Netlify Forms...) -->
         <form id="contactForm" action="#" method="post">
-          <div class="field"><input id="f-name" name="nombre" placeholder=" " required><label for="f-name">Nombre</label></div>
-          <div class="field"><input id="f-biz" name="negocio" placeholder=" "><label for="f-biz">Tu negocio</label></div>
+          <div class="field"><input id="f-name" name="nombre" placeholder=" " required><label data-i18n="fName" for="f-name">Name</label></div>
+          <div class="field"><input id="f-biz" name="negocio" placeholder=" "><label data-i18n="fBiz" for="f-biz">Your business</label></div>
           <div class="field"><input id="f-mail" type="email" name="email" placeholder=" " required><label for="f-mail">Email</label></div>
-          <div class="field"><textarea id="f-msg" name="mensaje" placeholder=" "></textarea><label for="f-msg">¿Qué necesitas?</label></div>
-          <button class="btn" type="submit">Enviar mensaje</button>
+          <div class="field"><textarea id="f-msg" name="mensaje" placeholder=" "></textarea><label data-i18n="fMsg" for="f-msg">What do you need?</label></div>
+          <button data-i18n="fSend" class="btn" type="submit">Send message</button>
         </form>
       </div>
     </div>
@@ -576,7 +596,7 @@
 <footer>
   <div class="wrap">
     <a href="#top" class="logo" style="color:var(--ink)">Nexo Growth</a>
-    <span>© <span id="year"></span> Nexo Growth. Todos los derechos reservados.</span>
+    <span><span>©</span> <span id="year"></span> Nexo Growth. <span data-i18n="rights">All rights reserved.</span></span>
   </div>
 </footer>
 
@@ -586,6 +606,91 @@
   const NS = 'http://www.w3.org/2000/svg';
   const $ = id => document.getElementById(id);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- idioma: inglés por defecto; el HTML está en inglés y ES guarda la traducción ---------- */
+  const STR = {
+    en: {
+      title: 'Nexo Growth — Web design agency', desc: 'Nexo Growth: we help businesses improve their public image and their digital operations.',
+      home: 'Nexo Growth, home', menu: 'Open menu', conv: 'From visitors to customers: digital presence that turns into results',
+      mission: 'Our mission is to help businesses improve their public image and their digital operations.', hl: ['public', 'image', 'digital', 'operations.'],
+      alt: ['Mérida', 'Cloud forest', 'Páramo', 'Glacier', 'Pico Bolívar'],
+      formDemo: 'Demo form: connect it to your email service to receive messages.'
+    },
+    es: {
+      title: 'Nexo Growth — Agencia de páginas web', desc: 'Nexo Growth: ayudamos a negocios a mejorar su imagen pública y su funcionamiento digital.',
+      home: 'Nexo Growth, inicio', menu: 'Abrir menú', conv: 'De visitas a clientes: presencia digital que se convierte en resultados',
+      mission: 'Nuestra misión es ayudar a los negocios a mejorar su imagen pública y su funcionamiento digital.', hl: ['imagen', 'pública', 'funcionamiento', 'digital.'],
+      alt: ['Mérida', 'Bosque nublado', 'Páramo', 'Glaciar', 'Pico Bolívar'],
+      formDemo: 'Formulario de ejemplo: conéctalo a tu servicio de email para recibir mensajes.'
+    }
+  };
+  const ES = {
+    "hint": "Desliza para ascender",
+    "navMission": "Misión",
+    "navServices": "Servicios",
+    "navProcess": "Proceso",
+    "navProjects": "Proyectos",
+    "navContact": "Contacto",
+    "navTalk": "Hablemos",
+    "slogan": "Soluciones sin límites",
+    "summitEye": "De la base a la cima",
+    "summitTitle": "Llevamos tu negocio <span class=\"grad-text\">a lo más alto.</span>",
+    "tagline": "Ayudamos a negocios a mejorar su imagen pública y su funcionamiento digital.",
+    "ctaTalk": "Hablemos de tu proyecto",
+    "ctaServices": "Ver servicios",
+    "altitude": "ALTITUD",
+    "coords": "8°32′N · 71°03′O — Sierra Nevada de Mérida",
+    "missionEye": "Nuestra misión",
+    "lead1": "Creamos páginas web para negocios que no solo quieren mejorar su <strong>presencia digital</strong>, sino también su <strong>conversión</strong>.",
+    "lead2": "Ofrecemos soluciones confiables y sin límites para que nuestros clientes alcancen sus objetivos de forma <strong>predecible y eficiente</strong>.",
+    "pillar1": "Confiable",
+    "pillar2": "Predecible",
+    "pillar3": "Eficiente",
+    "chartCap": "PRESENCIA → CONVERSIÓN",
+    "chart1": "VISITAS",
+    "chart2": "INTERÉS",
+    "chart3": "CLIENTES",
+    "servTitle": "Páginas web,<br>a tu medida.",
+    "servIntro": "Nos dedicamos a una sola cosa y la hacemos a fondo: crear páginas web. Desde una web informativa sencilla hasta una con pagos y agendamientos completamente integrados.",
+    "rangeLow": "Esencial",
+    "card3": "Completamente integrada",
+    "card1": "Web informativa",
+    "card1p": "Para quien ofrece un servicio o un producto sencillo y necesita presentarlo con una imagen profesional: quién eres, qué ofreces y cómo contactarte, claro y bien presentado.",
+    "idealFor": "Ideal para",
+    "card1fit": "Servicios y productos sencillos",
+    "card2": "Pagos o agendamientos",
+    "card2p": "Para negocios que quieren que su web trabaje por ellos: cobrar en línea o recibir reservas y citas directamente desde la página.",
+    "card2fit": "Negocios que cobran o agendan",
+    "card3p": "Pagos y agendamientos funcionando juntos dentro de tu web, para que tus clientes reserven y paguen en un solo lugar, sin pasos de más.",
+    "card3fit": "Todo en un solo lugar",
+    "procTitle": "Cómo<br>trabajamos.",
+    "procIntro": "Un proceso claro y sencillo, para que sepas en todo momento cuál es el siguiente paso.",
+    "step1": "Nos cuentas tu idea",
+    "step1p": "Hablamos sobre tu negocio, tus objetivos y lo que necesitas que haga tu web.",
+    "step2": "Recibes tu cotización",
+    "step2p": "Con esa información preparamos una cotización a la medida de tu proyecto.",
+    "step3": "Diseñamos tu web",
+    "step3p": "Creamos tu web cuidando cada detalle y la ajustamos contigo hasta que estés completamente satisfecho.",
+    "step4": "Lanzamos",
+    "step4p": "Publicamos tu web y queda lista para recibir a tus clientes.",
+    "kicker": "Sin precios fijos · Sin detalles al azar",
+    "closeTitle": "Cada proyecto, cotizado a tu medida.<br><span class=\"grad-text\">Cada detalle, cuidado hasta el final.</span>",
+    "closeSub": "Cada negocio es distinto, por eso trabajamos por cotización y no con precios fijos. Nuestro equipo trabaja para que quedes completamente satisfecho, y por eso nos fijamos en los pequeños detalles que marcan la diferencia.",
+    "ctaQuote": "Solicitar cotización",
+    "projTitle": "Cimas que ya<br>hemos alcanzado.",
+    "projIntro": "Negocios reales que ya confían en nosotros.",
+    "contactTitle": "Empieza<br>el <span class=\"grad-text\">ascenso.</span>",
+    "contactIntro": "Cuéntanos sobre tu negocio y lo que necesitas, y te enviamos una cotización a la medida.",
+    "location": "Ubicación",
+    "fName": "Nombre",
+    "fBiz": "Tu negocio",
+    "fMsg": "¿Qué necesitas?",
+    "fSend": "Enviar mensaje",
+    "rights": "Todos los derechos reservados.",
+    "projType": "Detailing móvil · Sitio web"
+  };
+  let lang = 'en';
+  try { if (localStorage.getItem('nexo-lang') === 'es') lang = 'es'; } catch (e) {}
 
   /* ---------- utilidades ---------- */
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -619,10 +724,10 @@
 
   // Sierra Nevada de Mérida (estilizada): El León, El Toro, Espejo, Bolívar, La Concha, Humboldt, Bonpland
   const PEAKS = [
-    { x: 230, y: 540, s: .8 }, { x: 460, y: 480, s: .85, name: 'Presencia', sub: 'digital' },
-    { x: 670, y: 430, s: 1.0, name: 'Imagen', sub: 'de marca' }, { x: 820, y: 300, s: 1.3, name: 'Crecimiento', sub: 'orgánico' },
-    { x: 935, y: 365, s: 1.15 }, { x: 1150, y: 345, s: .95, name: 'Experiencia', sub: 'digital' },
-    { x: 1290, y: 365, s: .95, name: 'Visibilidad', sub: 'online' }, { x: 1500, y: 490, s: .8 }
+    { x: 230, y: 540, s: .8 }, { x: 460, y: 480, s: .85, name: 'Presencia', sub: 'digital', en: ['Digital', 'presence'] },
+    { x: 670, y: 430, s: 1.0, name: 'Imagen', sub: 'de marca', en: ['Brand', 'image'] }, { x: 820, y: 300, s: 1.3, name: 'Crecimiento', sub: 'orgánico', en: ['Organic', 'growth'] },
+    { x: 935, y: 365, s: 1.15 }, { x: 1150, y: 345, s: .95, name: 'Experiencia', sub: 'digital', en: ['Digital', 'experience'] },
+    { x: 1290, y: 365, s: .95, name: 'Visibilidad', sub: 'online', en: ['Online', 'visibility'] }, { x: 1500, y: 490, s: .8 }
   ];
   const L1 = ridge({ peaks: PEAKS, base: 660, jag: 26, freq: .018, seed: 7 });
   const L2 = ridge({ peaks: [{ x: 120, y: 600, s: .55 }, { x: 520, y: 590, s: .6 }, { x: 980, y: 560, s: .5 }, { x: 1420, y: 580, s: .6 }], base: 740, jag: 34, freq: .012, seed: 21 });
@@ -670,10 +775,10 @@
     g.setAttribute('transform', `translate(${best[0]} ${best[1]})`);
     g.style.opacity = 0;
     g.innerHTML = `<circle r="14" fill="none" stroke="#7CFF8A" stroke-opacity=".5"/><circle r="5.5" fill="#fff"/>
-      <g class="lbl"><text y="-28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#fff" fill-opacity=".85" letter-spacing="1">${p.name.toUpperCase()}</text>
-      <text y="-12" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#7CFF8A">${p.sub}</text></g>`;
+      <g class="lbl"><text y="-28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#fff" fill-opacity=".85" letter-spacing="1" class="nm"></text>
+      <text y="-12" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#7CFF8A" class="sb"></text></g>`;
     $('nodes').appendChild(g);
-    nodes.push({ el: g, lbl: g.querySelector(".lbl"), at: cum[bi] / TOTAL });
+    nodes.push({ el: g, lbl: g.querySelector(".lbl"), at: cum[bi] / TOTAL, nm: g.querySelector('.nm'), sb: g.querySelector('.sb'), p });
   });
 
   // estrellas
@@ -823,8 +928,8 @@
     const ap = smooth(0, .9, p), alt = Math.round(lerp(1600, 4978, ap));
     if (alt !== last$) {
       last$ = alt;
-      $('altNum').textContent = String(alt).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' m';
-      $('altLabel').textContent = alt < 2600 ? 'Mérida' : alt < 3600 ? 'Bosque nublado' : alt < 4700 ? 'Páramo' : alt < 4978 ? 'Glaciar' : 'Pico Bolívar';
+      $('altNum').textContent = String(alt).replace(/\B(?=(\d{3})+(?!\d))/g, lang === 'es' ? '.' : ',') + ' m';
+      $('altLabel').textContent = STR[lang].alt[alt < 2600 ? 0 : alt < 3600 ? 1 : alt < 4700 ? 2 : alt < 4978 ? 3 : 4];
       $('altFill').style.height = (ap * 100) + '%';
     }
 
@@ -843,9 +948,13 @@
 
   /* ---------- misión: palabra a palabra con el scroll ---------- */
   const mt = $('missionText');
-  const HL = ['imagen', 'pública', 'funcionamiento', 'digital.'];
-  mt.innerHTML = mt.textContent.split(' ').map(w => `<span class="w${HL.includes(w) ? ' hl' : ''}">${w}</span>`).join(' ');
-  const words = [...mt.querySelectorAll('.w')];
+  let words = [];
+  function buildMission() {
+    const { mission, hl } = STR[lang];
+    mt.innerHTML = mission.split(' ').map(w => `<span class="w${hl.includes(w) ? ' hl' : ''}">${w}</span>`).join(' ');
+    words = [...mt.querySelectorAll('.w')];
+  }
+  buildMission();
   function missionScroll() {
     const r = mt.getBoundingClientRect();
     const k = reduced ? 1 : clamp((innerHeight * .85 - r.top) / (innerHeight * .6));
@@ -854,10 +963,10 @@
   addEventListener('scroll', missionScroll, { passive: true }); missionScroll();
 
   /* ---------- proyectos ---------- */
-  const PROJECTS = [{ title: 'Oh My Wash', type: 'Detailing móvil · Sitio web', img: 'assets/oh-my-wash-logo.png', url: 'https://ohmywashdetailing.com' }];
+  const PROJECTS = [{ title: 'Oh My Wash', type: 'Mobile detailing · Website', img: 'assets/oh-my-wash-logo.png', url: 'https://ohmywashdetailing.com' }];
   $('projects').innerHTML = PROJECTS.map((p, i) => `<a class="project" href="${p.url}" target="_blank" rel="noopener" data-reveal="scale" style="--d:${i * .12}s">
-      <div class="art"><img src="${p.img}" alt="Logo de ${p.title}" loading="lazy"></div>
-      <div class="meta"><div><small>${p.type}</small><h3>${p.title}</h3></div>
+      <div class="art"><img src="${p.img}" alt="${p.title} logo" loading="lazy"></div>
+      <div class="meta"><div><small data-i18n="projType">${p.type}</small><h3>${p.title}</h3></div>
       <span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
     </a>`).join('');
 
@@ -872,9 +981,32 @@
   }));
 
   $('contactForm').addEventListener('submit', e => {
-    if ($('contactForm').getAttribute('action') === '#') { e.preventDefault(); alert('Formulario de ejemplo: conéctalo a tu servicio de email para recibir mensajes.'); }
+    if ($('contactForm').getAttribute('action') === '#') { e.preventDefault(); alert(STR[lang].formDemo); }
   });
   $('year').textContent = new Date().getFullYear();
+
+  /* ---------- selector EN / ES ---------- */
+  const i18n = [...document.querySelectorAll('[data-i18n]')].map(el => ({ el, key: el.dataset.i18n, en: el.innerHTML }));
+  function applyLang() {
+    const s = STR[lang];
+    document.documentElement.lang = lang;
+    document.title = s.title;
+    document.querySelector('meta[name="description"]').content = s.desc;
+    document.querySelector('.nav .logo').setAttribute('aria-label', s.home);
+    $('burger').setAttribute('aria-label', s.menu);
+    document.querySelector('.conv').setAttribute('aria-label', s.conv);
+    i18n.forEach(({ el, key, en }) => { el.innerHTML = lang === 'es' ? ES[key] : en; });
+    nodes.forEach(n => { const [a, b] = lang === 'es' ? [n.p.name, n.p.sub] : n.p.en; n.nm.textContent = a.toUpperCase(); n.sb.textContent = b; });
+    buildMission(); missionScroll();
+    last$ = -1;
+    document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  }
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => {
+    lang = b.dataset.lang;
+    try { localStorage.setItem('nexo-lang', lang); } catch (e) {}
+    applyLang();
+  }));
+  applyLang();
 })();
 </script>
 </body>
