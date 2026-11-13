@@ -10,14 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Sora:wght@700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #050505;
-    --bg-2: #0e0e0e;
-    --ink: #f5f5f5;
-    --muted: #9a9a9a;
-    --line: rgba(255, 255, 255, 0.1);
+    --bg: #04160b;        /* verde bosque profundo */
+    --bg-2: #072114;      /* verde pino (secciones alternas) */
+    --bg-3: #0b2e1a;      /* verde musgo (tarjetas) */
+    --ink: #ecfff1;       /* blanco menta */
+    --muted: #93bfa0;     /* salvia */
+    --line: rgba(124, 255, 150, 0.14);
     --green: #00C805;
     --green-lt: #5BFF6A;
-    --grad: linear-gradient(100deg, var(--green), var(--green-lt));
+    --lime: #C6FF4D;
+    --mint: #A8F5C0;
+    --grad: linear-gradient(100deg, var(--green), var(--green-lt) 60%, var(--lime));
     --display: 'Syne', sans-serif;
     --body: 'Manrope', sans-serif;
     --mono: 'JetBrains Mono', monospace;
@@ -58,7 +61,7 @@
     border-bottom: 1px solid transparent;
   }
   .nav.scrolled {
-    background: rgba(5, 5, 5, .62);
+    background: rgba(4, 22, 11, .72);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     border-color: var(--line);
@@ -75,68 +78,59 @@
     display: inline-flex; align-items: center; gap: 10px;
     padding: 14px 26px; border-radius: 100px;
     font-weight: 700; font-size: 15px;
-    background: var(--grad); color: #000000;
+    background: var(--grad); color: #03160b;
     transition: transform .3s var(--ease), box-shadow .3s;
     box-shadow: 0 10px 30px -10px rgba(0, 200, 5, .6);
     border: 0; cursor: pointer; font-family: var(--body);
   }
   .btn:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -12px rgba(0, 200, 5, .8); }
-  .btn.ghost { background: rgba(255,255,255,.06); color: var(--ink); box-shadow: none; border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(6px); }
-  .btn.ghost:hover { background: rgba(255,255,255,.12); }
+  .btn.ghost { background: rgba(168,245,192,.08); color: var(--ink); box-shadow: none; border: 1px solid rgba(168,245,192,.3); backdrop-filter: blur(6px); }
+  .btn.ghost:hover { background: rgba(168,245,192,.16); }
   .nav .btn { padding: 10px 20px; font-size: 14px; }
   .burger { display: none; background: none; border: 0; color: var(--ink); cursor: pointer; }
   .nav-right { display: flex; align-items: center; gap: 14px; }
-  .lang { display: flex; padding: 3px; border-radius: 100px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); }
+  .lang { display: flex; padding: 3px; border-radius: 100px; border: 1px solid rgba(168,245,192,.25); background: rgba(168,245,192,.06); }
   .lang button { min-width: 38px; padding: 6px 9px; border: 0; border-radius: 100px; background: none; color: var(--muted); font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .06em; cursor: pointer; transition: background .25s, color .25s; }
   .lang button:hover { color: var(--ink); }
-  .lang button[aria-pressed="true"] { background: var(--grad); color: #000000; }
+  .lang button[aria-pressed="true"] { background: var(--grad); color: #03160b; }
   .lang button:focus-visible { outline: 2px solid var(--green-lt); outline-offset: 2px; }
 
-  /* ---------- HERO (scroll-driven ascent) ---------- */
-  .ascent { height: 460vh; position: relative; }
+  /* ---------- HERO (estático: estado final del ascenso) ---------- */
+  .ascent { height: 100vh; height: 100svh; position: relative; }
   .ascent-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
   #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .ascent-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 22vh; background: linear-gradient(transparent, var(--bg)); pointer-events: none; z-index: 2; }
 
-  .intro, .summit { position: absolute; z-index: 3; will-change: transform, opacity; }
-  .intro { inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 30vh; text-align: center; pointer-events: none; }
+  .intro { position: absolute; z-index: 3; left: 0; right: 0; top: 0; padding: calc(72px + 6vh) 24px 0; text-align: center; pointer-events: none; }
   .intro h1 {
     font-family: 'Sora', sans-serif; font-weight: 700;
-    font-size: clamp(56px, 12vw, 190px);
+    font-size: clamp(54px, min(10.5vw, 15vh), 160px);
     line-height: .9; letter-spacing: -.045em;
-    text-shadow: 0 10px 60px rgba(0,0,0,.4);
+    text-shadow: 0 10px 60px rgba(2, 14, 7, .5);
   }
-  .intro h1 span { display: inline-block; will-change: transform; }
   .slogan {
-    margin-top: 26px; font-family: var(--body); font-weight: 500;
-    font-size: clamp(15px, 1.6vw, 22px); letter-spacing: .32em; text-transform: uppercase;
-    color: rgba(245, 245, 245, .88); text-shadow: 0 2px 20px rgba(0,0,0,.7);
+    margin-top: 22px; font-family: var(--body); font-weight: 500;
+    font-size: clamp(13px, 1.5vw, 20px); letter-spacing: .32em; text-transform: uppercase;
+    color: var(--mint); text-shadow: 0 2px 20px rgba(2, 14, 7, .8);
   }
-  .scroll-hint {
-    position: absolute; left: 50%; bottom: 6vh; transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-    font-family: var(--mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
-  }
-  .scroll-hint i { width: 1px; height: 54px; background: linear-gradient(var(--green-lt), transparent); position: relative; overflow: hidden; }
-  .scroll-hint i::after { content: ''; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: #fff; animation: drip 1.8s var(--ease) infinite; }
-  @keyframes drip { to { top: 120%; } }
 
-  .summit { left: max(24px, calc((100vw - 1200px) / 2 + 24px)); top: 15vh; max-width: 520px; opacity: 0; pointer-events: none; }
-  .summit.live { pointer-events: auto; }
+  /* bloque de propuesta, justo debajo de la portada */
+  .summit { padding: 110px 0 20px; text-align: center; }
+  .summit .wrap { display: flex; flex-direction: column; align-items: center; }
   .summit h2 {
     font-family: var(--display); font-weight: 800;
-    font-size: clamp(38px, 4.4vw, 66px); line-height: 1; letter-spacing: -.035em;
-    margin: 18px 0 22px; text-shadow: 0 6px 40px rgba(5, 5, 5, .5);
+    font-size: clamp(38px, 5vw, 72px); line-height: 1; letter-spacing: -.035em;
+    margin: 18px 0 22px; max-width: 900px; text-shadow: 0 6px 40px rgba(2, 14, 7, .6);
   }
-  .summit p { font-size: 19px; color: #e6e6e6; max-width: 460px; margin-bottom: 32px; text-shadow: 0 2px 20px rgba(5, 5, 5, .7); }
-  .summit .ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .summit p { font-size: 19px; color: #c4e6cd; max-width: 560px; margin-bottom: 32px; text-shadow: 0 2px 20px rgba(2, 14, 7, .85); }
+  .summit .ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
   .altimeter {
     position: absolute; right: max(24px, calc((100vw - 1200px) / 2 + 24px)); bottom: 5vh;
     z-index: 3; display: flex; align-items: center; gap: 16px; font-family: var(--mono);
   }
-  .alt-track { width: 2px; height: 64px; background: rgba(255,255,255,.12); position: relative; border-radius: 2px; }
-  .alt-fill { position: absolute; left: 0; bottom: 0; width: 100%; height: 0; background: linear-gradient(to top, var(--green), var(--green-lt)); border-radius: 2px; }
+  .alt-track { width: 2px; height: 64px; background: rgba(168,245,192,.15); position: relative; border-radius: 2px; }
+  .alt-fill { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--green), var(--lime)); border-radius: 2px; }
   .alt-fill::after { content: ''; position: absolute; top: -5px; left: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--green-lt); box-shadow: 0 0 14px var(--green-lt); }
   .alt-read { display: flex; flex-direction: column; gap: 4px; min-width: 120px; }
   .alt-read small { font-size: 11px; letter-spacing: .2em; color: var(--muted); }
@@ -146,6 +140,7 @@
 
   /* ---------- SECTIONS ---------- */
   section.block { padding: 140px 0; position: relative; }
+  #servicios, #proyectos { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 18%, var(--bg-2) 82%, var(--bg) 100%); }
   .section-head { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 64px; flex-wrap: wrap; }
   .section-head h2 { font-family: var(--display); font-weight: 800; font-size: clamp(36px, 5vw, 64px); line-height: 1; letter-spacing: -.03em; margin-top: 14px; }
   .section-head p { color: var(--muted); max-width: 380px; }
@@ -160,7 +155,7 @@
   .mission-text .w { opacity: .14; transition: opacity .25s linear; }
   .mission-text .w.hl { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .mission-more { display: grid; grid-template-columns: 1.05fr 1fr; gap: 72px; align-items: center; margin-top: 120px; }
-  .mission-more .lead { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.65; color: #bdbdbd; max-width: 540px; }
+  .mission-more .lead { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.65; color: #b9dcc3; max-width: 540px; }
   .mission-more .lead + .lead { margin-top: 22px; }
   .mission-more .lead strong { color: var(--ink); font-weight: 600; }
   .pillars { display: flex; flex-wrap: wrap; gap: 14px 30px; list-style: none; margin-top: 40px; font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
@@ -173,7 +168,7 @@
   .conv .area { opacity: 0; transition: opacity 1.4s ease .8s; }
   .conv .node { opacity: 0; transition: opacity .7s ease var(--d); }
   .conv .node circle { fill: var(--bg); stroke: var(--green-lt); stroke-opacity: .5; }
-  .conv .node .dot { fill: #fff; stroke: none; }
+  .conv .node .dot { fill: var(--lime); stroke: none; }
   .conv .node text { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; fill: var(--ink); text-anchor: middle; }
   .conv.in .line { stroke-dashoffset: 0; }
   .conv.in .area, .conv.in .node { opacity: 1; }
@@ -185,7 +180,7 @@
   .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
   .card {
     position: relative; padding: 38px 32px 34px; border-radius: 22px;
-    background: linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+    background: linear-gradient(160deg, var(--bg-3), rgba(11, 46, 26, .35));
     border: 1px solid var(--line); overflow: hidden;
     transition: transform .5s var(--ease), border-color .4s, box-shadow .5s;
   }
@@ -194,9 +189,9 @@
     background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 0%), rgba(0, 200, 5, .14), transparent 45%);
     opacity: 0; transition: opacity .4s;
   }
-  .card:hover { transform: translateY(-10px); border-color: rgba(91, 255, 106, .35); box-shadow: 0 30px 60px -30px rgba(0, 200, 5, .45); }
+  .card:hover { transform: translateY(-10px); border-color: rgba(198, 255, 77, .45); box-shadow: 0 30px 60px -30px rgba(0, 200, 5, .45); }
   .card:hover::before { opacity: 1; }
-  .card .num { font-family: var(--mono); font-size: 13px; color: var(--green-lt); letter-spacing: .1em; }
+  .card .num { font-family: var(--mono); font-size: 13px; color: var(--lime); letter-spacing: .1em; }
   .card .icon { width: 58px; height: 58px; margin: 28px 0 24px; }
   .card h3 { font-family: var(--display); font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 12px; }
   .card p { color: var(--muted); font-size: 16px; }
@@ -219,7 +214,7 @@
   .steps.in .step { opacity: 1; transform: none; }
   .step i { position: absolute; top: -44px; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 1px solid var(--green-lt); }
   .step i::after { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--green-lt); box-shadow: 0 0 10px var(--green-lt); }
-  .step small { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; color: var(--green-lt); }
+  .step small { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; color: var(--lime); }
   .step h3 { font-family: var(--display); font-size: 22px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; margin: 12px 0 10px; }
   .step p { color: var(--muted); font-size: 15px; }
   .process-close { display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 110px; }
@@ -232,19 +227,19 @@
   /* Proyectos */
   .projects { display: grid; grid-template-columns: minmax(0, 520px); gap: 22px; }
   .project { display: block; position: relative; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); cursor: pointer; }
-  .project .art { display: grid; place-items: center; height: 190px; background: radial-gradient(circle at 50% 45%, rgba(45, 224, 214, .16), transparent 62%), var(--bg-2); transition: transform .9s var(--ease); }
+  .project .art { display: grid; place-items: center; height: 190px; background: radial-gradient(circle at 50% 45%, rgba(91, 255, 106, .18), transparent 62%), var(--bg-3); transition: transform .9s var(--ease); }
   .project:hover .art { transform: scale(1.06); }
   .project .art img { display: block; width: 250px; max-width: 70%; height: auto; }
   .project .meta { position: relative; padding: 20px 24px; background: var(--bg); border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: end; gap: 16px; }
   .project h3 { font-family: var(--display); font-size: 24px; font-weight: 700; }
   .project small { font-family: var(--mono); color: var(--muted); font-size: 12px; letter-spacing: .08em; }
-  .project .arrow { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); display: grid; place-items: center; flex-shrink: 0; transition: background .35s, transform .45s var(--ease); }
+  .project .arrow { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(168,245,192,.3); display: grid; place-items: center; flex-shrink: 0; transition: background .35s, transform .45s var(--ease); }
   .project:hover .arrow { background: var(--green-lt); color: var(--bg); transform: rotate(-45deg); }
 
   /* Contacto */
   .contact-box {
     border-radius: 32px; padding: 72px; position: relative; overflow: hidden;
-    background: linear-gradient(140deg, #171717, #0a0a0a 60%);
+    background: linear-gradient(140deg, #0f3d22, #072114 60%);
     border: 1px solid var(--line);
     display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
   }
@@ -253,7 +248,7 @@
   .contact-box > div > p { color: var(--muted); margin-bottom: 34px; }
   .contact-list { list-style: none; display: grid; gap: 18px; }
   .contact-list li { display: flex; gap: 14px; align-items: center; }
-  .contact-list .ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.06); border: 1px solid var(--line); flex-shrink: 0; }
+  .contact-list .ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(168,245,192,.08); border: 1px solid var(--line); flex-shrink: 0; }
   .contact-list small { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
   .contact-list a { display: block; width: fit-content; transition: color .3s; }
   .contact-list a:hover { color: var(--green-lt); }
@@ -272,17 +267,17 @@
   .field { position: relative; }
   .field input, .field textarea {
     width: 100%; padding: 22px 18px 10px; border-radius: 14px;
-    background: rgba(255,255,255,.04); border: 1px solid var(--line);
+    background: rgba(4, 22, 11, .55); border: 1px solid var(--line);
     color: var(--ink); font: inherit; font-size: 16px; outline: none; transition: border-color .3s, background .3s;
   }
   .field textarea { min-height: 130px; resize: vertical; }
   .field label { position: absolute; left: 18px; top: 16px; color: var(--muted); font-size: 15px; pointer-events: none; transition: all .25s var(--ease); }
-  .field input:focus, .field textarea:focus { border-color: var(--green-lt); background: rgba(255,255,255,.07); }
+  .field input:focus, .field textarea:focus { border-color: var(--green-lt); background: rgba(4, 22, 11, .8); }
   .field input:focus + label, .field input:not(:placeholder-shown) + label,
   .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { top: 7px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--green-lt); }
   form .btn { justify-self: start; margin-top: 6px; }
 
-  footer { padding: 70px 0 40px; border-top: 1px solid var(--line); margin-top: 140px; }
+  footer { padding: 70px 0 40px; border-top: 1px solid var(--line); margin-top: 140px; background: #031008; }
   footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
 
   /* ---------- REVEALS ---------- */
@@ -310,9 +305,9 @@
     .logo svg { width: 30px; height: 20px; }
     .nav-right { gap: 8px; }
     .lang button { min-width: 32px; padding: 5px 6px; font-size: 11px; }
-    .nav.open ul { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; padding: 24px; gap: 22px; background: rgba(5, 5, 5, .96); border-bottom: 1px solid var(--line); }
-    .intro { padding-top: 32vh; }
-    .summit { top: 13vh; right: 24px; }
+    .nav.open ul { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; padding: 24px; gap: 22px; background: rgba(4, 22, 11, .97); border-bottom: 1px solid var(--line); }
+    .intro { padding-top: calc(72px + 8vh); }
+    .summit { padding-top: 80px; }
     .summit p { font-size: 17px; }
     .altimeter { top: auto; bottom: 5vh; transform: none; }
     .alt-track { display: none; }
@@ -326,11 +321,9 @@
     .logo { font-size: 15px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .ascent { height: 100vh; }
     [data-reveal] { opacity: 1; transform: none; transition: none; }
     .conv .line, .conv .area, .conv .node { transition: none; }
     .steps::after, .step { transition: none; }
-    .scroll-hint { display: none; }
     html { scroll-behavior: auto; }
   }
 </style>
@@ -385,16 +378,17 @@
           <stop offset="1" stop-color="#00C805" stop-opacity="0"/>
         </radialGradient>
         <radialGradient id="fogGrad">
-          <stop offset="0" stop-color="#d9d9d9" stop-opacity=".5"/>
-          <stop offset="1" stop-color="#d9d9d9" stop-opacity="0"/>
+          <stop offset="0" stop-color="#8fe3a8" stop-opacity=".35"/>
+          <stop offset="1" stop-color="#8fe3a8" stop-opacity="0"/>
         </radialGradient>
         <linearGradient id="snowGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#ffffff"/>
-          <stop offset="1" stop-color="#9aa59c"/>
+          <stop offset="0" stop-color="#eafff0"/>
+          <stop offset="1" stop-color="#5f9c74"/>
         </linearGradient>
         <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stop-color="#00C805"/>
-          <stop offset="1" stop-color="#7CFF8A"/>
+          <stop offset=".7" stop-color="#5BFF6A"/>
+          <stop offset="1" stop-color="#C6FF4D"/>
         </linearGradient>
         <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur stdDeviation="6"/>
@@ -403,12 +397,9 @@
       </defs>
 
       <rect width="1600" height="1000" fill="url(#sky)"/>
-      <g id="stars"></g>
       <g id="sun">
         <circle r="330" fill="url(#sunGlow)"/>
-        <circle r="46" fill="#f0fff1"/>
       </g>
-      <g id="condor"><path d="M-46 3 Q-30 -8 -12 -3 Q-5 -6 0 -8 Q5 -6 12 -3 Q30 -8 46 3 L40 2 L43 5 L36 3 L38 6 Q24 1 11 3 Q5 6 0 8 Q-5 6 -11 3 Q-24 1 -38 6 L-36 3 L-43 5 L-40 2 Z"/></g>
 
       <!-- L1: Sierra Nevada de Mérida -->
       <g id="L1">
@@ -417,9 +408,8 @@
         <path id="alpenglow" fill="#00C805" clip-path="url(#clipL1)" opacity="0"/>
         <path id="ridgeGlow" fill="none" stroke="url(#lineGrad)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" opacity=".8"/>
         <path id="ridgeLine" fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="arrowHead" fill="none" stroke="#7CFF8A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        <path id="arrowHead" fill="none" stroke="#C6FF4D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
         <g id="nodes"></g>
-        <circle id="spark" r="7" fill="#fff" opacity="0"/>
       </g>
       <ellipse class="fog" data-speed="0.6" cx="500" cy="640" rx="520" ry="70" fill="url(#fogGrad)"/>
       <ellipse class="fog" data-speed="-0.4" cx="1250" cy="610" rx="460" ry="60" fill="url(#fogGrad)"/>
@@ -431,13 +421,28 @@
       <g id="L4"><path id="L4Path"/><g id="frailejones"></g></g>
     </svg>
 
-    <div class="intro" id="intro">
-      <h1 id="introTitle"><span>Nexo</span> <span class="grad-text">Growth</span></h1>
+    <div class="intro">
+      <h1><span>Nexo</span> <span class="grad-text">Growth</span></h1>
       <p data-i18n="slogan" class="slogan">Limitless solutions</p>
-      <div class="scroll-hint" id="hint"><span data-i18n="hint">Scroll to ascend</span><i></i></div>
     </div>
 
-    <div class="summit" id="summit">
+    <div class="altimeter" aria-hidden="true">
+      <div class="alt-track"><div class="alt-fill" id="altFill"></div></div>
+      <div class="alt-read">
+        <small data-i18n="altitude">ALTITUDE</small>
+        <strong id="altNum">4,978 m</strong>
+        <em id="altLabel">Pico Bolívar</em>
+      </div>
+    </div>
+    <div data-i18n="coords" class="coords" aria-hidden="true">8°32′N · 71°03′W — Sierra Nevada de Mérida</div>
+    <div class="ascent-fade"></div>
+  </div>
+</header>
+
+<main>
+  <!-- ============ PROPUESTA ============ -->
+  <section class="summit" id="summit">
+    <div class="wrap">
       <p data-i18n="summitEye" class="eyebrow">From base to summit</p>
       <h2 data-i18n="summitTitle">We take your business <span class="grad-text">to the top.</span></h2>
       <p data-i18n="tagline">We help businesses improve their public image and their digital operations.</p>
@@ -448,21 +453,8 @@
         <a data-i18n="ctaServices" href="#servicios" class="btn ghost">View services</a>
       </div>
     </div>
+  </section>
 
-    <div class="altimeter" aria-hidden="true">
-      <div class="alt-track"><div class="alt-fill" id="altFill"></div></div>
-      <div class="alt-read">
-        <small data-i18n="altitude">ALTITUDE</small>
-        <strong id="altNum">1,600 m</strong>
-        <em id="altLabel">Mérida</em>
-      </div>
-    </div>
-    <div data-i18n="coords" class="coords" aria-hidden="true">8°32′N · 71°03′W — Sierra Nevada de Mérida</div>
-    <div class="ascent-fade"></div>
-  </div>
-</header>
-
-<main>
   <!-- ============ MISIÓN ============ -->
   <section class="block mission" id="mision">
     <div class="wrap">
@@ -518,7 +510,7 @@
         </article>
         <article class="card" data-reveal style="--d:.12s">
           <span class="num">02</span>
-          <svg class="icon" viewBox="0 0 58 58" fill="none" stroke="url(#lineGrad2)" stroke-width="2"><rect x="4" y="11" width="30" height="21" rx="3"/><path d="M4 18h30M9 26h8"/><rect x="26" y="25" width="27" height="25" rx="3" fill="#0d0d0d"/><path d="M26 32h27M33 21v7M46 21v7M33 40l4 4 8-8"/></svg>
+          <svg class="icon" viewBox="0 0 58 58" fill="none" stroke="url(#lineGrad2)" stroke-width="2"><rect x="4" y="11" width="30" height="21" rx="3"/><path d="M4 18h30M9 26h8"/><rect x="26" y="25" width="27" height="25" rx="3" fill="#0b2e1a"/><path d="M26 32h27M33 21v7M46 21v7M33 40l4 4 8-8"/></svg>
           <h3 data-i18n="card2">Payments or booking</h3>
           <p data-i18n="card2p">For businesses that want their website to work for them: take payments online or receive bookings and appointments right from the site.</p>
           <div class="fit"><span data-i18n="idealFor">Ideal for</span><strong data-i18n="card2fit">Businesses that charge or book</strong></div>
@@ -618,7 +610,6 @@
   'use strict';
   const NS = 'http://www.w3.org/2000/svg';
   const $ = id => document.getElementById(id);
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- idioma: inglés por defecto; el HTML está en inglés y ES guarda la traducción ---------- */
   const STR = {
@@ -713,18 +704,12 @@
   /* ---------- utilidades ---------- */
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const lerp = (a, b, t) => a + (b - a) * t;
-  const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
-  const easeInOut = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
   function noise(seed) {
     const r = rng(seed), v = Array.from({ length: 1024 }, () => r() * 2 - 1);
     const n = x => { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return lerp(v[i & 1023], v[(i + 1) & 1023], u); };
     return x => n(x) * .55 + n(x * 2.2) * .27 + n(x * 4.7) * .13 + n(x * 11) * .05;
   }
-  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
-  const mix = (a, b, t) => { const A = hex(a), B = hex(b); return 'rgb(' + A.map((v, i) => Math.round(lerp(v, B[i], t))).join(',') + ')'; };
-  // interpola una paleta por fotogramas clave [{at, c}]
-  const keyed = (keys, p) => { for (let i = 0; i < keys.length - 1; i++) { const a = keys[i], b = keys[i + 1]; if (p <= b.at) return mix(a.c, b.c, smooth(a.at, b.at, p)); } return keys[keys.length - 1].c; };
 
   /* ---------- cordilleras ---------- */
   function ridge({ peaks, base, jag, freq, seed, step = 5 }) {
@@ -775,7 +760,6 @@
   const TOTAL = cum[cum.length - 1];
   const lineD = 'M' + linePts.map(p => p[0] + ' ' + p[1].toFixed(1)).join(' L');
   ['ridgeLine', 'ridgeGlow'].forEach(id => { const el = $(id); el.setAttribute('d', lineD); el.style.strokeDasharray = TOTAL; el.style.strokeDashoffset = TOTAL; });
-  const pointAt = len => { let i = 1; while (i < cum.length - 1 && cum[i] < len) i++; const t = (len - cum[i - 1]) / ((cum[i] - cum[i - 1]) || 1); return [lerp(linePts[i - 1][0], linePts[i][0], t), lerp(linePts[i - 1][1], linePts[i][1], t)]; };
   // punta de flecha
   (function () {
     const [x, y] = linePts[linePts.length - 1], [px, py] = linePts[linePts.length - 2];
@@ -792,25 +776,12 @@
     const g = document.createElementNS(NS, 'g');
     g.setAttribute('transform', `translate(${best[0]} ${best[1]})`);
     g.style.opacity = 0;
-    g.innerHTML = `<circle r="14" fill="none" stroke="#7CFF8A" stroke-opacity=".5"/><circle r="5.5" fill="#fff"/>
-      <g class="lbl"><text y="-28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#fff" fill-opacity=".85" letter-spacing="1" class="nm"></text>
-      <text y="-12" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#7CFF8A" class="sb"></text></g>`;
+    g.innerHTML = `<circle r="14" fill="none" stroke="#C6FF4D" stroke-opacity=".55"/><circle r="5.5" fill="#eafff0"/>
+      <g class="lbl"><text y="-28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#ecfff1" letter-spacing="1" class="nm"></text>
+      <text y="-12" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#C6FF4D" class="sb"></text></g>`;
     $('nodes').appendChild(g);
     nodes.push({ el: g, lbl: g.querySelector(".lbl"), at: cum[bi] / TOTAL, nm: g.querySelector('.nm'), sb: g.querySelector('.sb'), p });
   });
-
-  // estrellas
-  (function () {
-    const r = rng(11), frag = document.createDocumentFragment();
-    for (let i = 0; i < 170; i++) {
-      const c = document.createElementNS(NS, 'circle');
-      c.setAttribute('cx', (r() * 1600).toFixed(0)); c.setAttribute('cy', (r() * 560).toFixed(0));
-      c.setAttribute('r', (r() * 1.3 + .3).toFixed(2)); c.setAttribute('fill', '#fff');
-      c.setAttribute('opacity', (r() * .7 + .2).toFixed(2));
-      frag.appendChild(c);
-    }
-    $('stars').appendChild(frag);
-  })();
 
   // frailejones (Espeletia), la planta emblema del páramo merideño:
   // tronco grueso cubierto de hojas secas, roseta densa y varas florales
@@ -858,104 +829,37 @@
     $('frailejones').innerHTML = html;
   })();
 
-  /* ---------- paletas: noche → alba → mañana dorada ---------- */
-  const SKY = [
-    [{ at: 0, c: '#000000' }, { at: .45, c: '#050806' }, { at: 1, c: '#07120a' }],
-    [{ at: 0, c: '#060606' }, { at: .45, c: '#0c1f10' }, { at: 1, c: '#0f3d18' }],
-    [{ at: 0, c: '#0b0b0b' }, { at: .45, c: '#0a7a1e' }, { at: 1, c: '#1fb83c' }]
-  ];
-  // al inicio sube las cordilleras (más la del fondo) para que el título quede sobre la roca oscura;
-  // con el scroll vuelven a su sitio para que la cima final no se corte
-  const RAISE = [130, 85, 40, 0], FOG_RAISE = [50, 30, 20, 0];
-  const LAYERS = [
-    { el: $('L1'), lift: 30, c: [{ at: 0, c: '#1f1f1f' }, { at: .5, c: '#262a27' }, { at: 1, c: '#2b302c' }] },
-    { el: $('L2'), lift: 140, c: [{ at: 0, c: '#161616' }, { at: .5, c: '#1a1d1b' }, { at: 1, c: '#1d211e' }] },
-    { el: $('L3'), lift: 300, c: [{ at: 0, c: '#0e0e0e' }, { at: .5, c: '#111312' }, { at: 1, c: '#131614' }] },
-    { el: $('L4'), lift: 560, c: [{ at: 0, c: '#050505' }, { at: .5, c: '#060606' }, { at: 1, c: '#080808' }] }
-  ];
+  /* ---------- escena estática: estado final del ascenso, en tonos verdes ---------- */
+  [['sky0', '#03160b'], ['sky1', '#0b4522'], ['sky2', '#1c9e42']].forEach(([id, c]) => $(id).setAttribute('stop-color', c));
+  $('sun').setAttribute('transform', 'translate(1040 250) scale(1.1)');
+  // cordilleras: de la más lejana (verde musgo) a la más cercana (se funde con el fondo)
+  const LAYERS = [['L1', 30, '#0f3f22'], ['L2', 140, '#0a2f19'], ['L3', 300, '#072212'], ['L4', 560, '#04160b']];
   const fogs = [...document.querySelectorAll('.fog')];
-  const fogBase = fogs.map(f => +f.getAttribute('cx'));
-  const sky = [$('sky0'), $('sky1'), $('sky2')];
-  const titleSpans = [...document.querySelectorAll('#introTitle span')];
-
-  /* ---------- bucle de animación ---------- */
-  const hero = $('top'), intro = $('intro'), summit = $('summit');
-  let target = reduced ? 1 : 0, cur = target, mx = 0, mxCur = 0, running = true, last$ = -1;
-
-  function readScroll() {
-    if (reduced) return;
-    const r = hero.getBoundingClientRect();
-    target = clamp(-r.top / (hero.offsetHeight - innerHeight));
+  LAYERS.forEach(([id, , c]) => $(id).setAttribute('fill', c));
+  $('alpenglow').setAttribute('opacity', '.2');
+  fogs.forEach(f => { f.setAttribute('cx', (+f.getAttribute('cx') + +f.dataset.speed * 500).toFixed(1)); f.setAttribute('opacity', '.4'); });
+  // baja la cordillera lo justo para que las etiquetas de las cimas queden debajo del título
+  const scene = $('scene'), slogan = document.querySelector('.slogan');
+  const TOP_LABEL = 285; // y (en unidades del SVG) de la etiqueta más alta, sin desplazar
+  function placeRange() {
+    const W = scene.clientWidth, H = scene.clientHeight, k = Math.max(W / 1600, H / 1000), offY = H - 1000 * k;
+    const sloganBottom = (slogan.getBoundingClientRect().bottom - scene.getBoundingClientRect().top - offY) / k;
+    const drop = clamp(sloganBottom + 24 - TOP_LABEL, 120, 320);
+    LAYERS.forEach(([id, lift]) => $(id).setAttribute('transform', `translate(0 ${(lift + drop).toFixed(1)})`));
+    fogs.forEach((f, i) => f.setAttribute('transform', `translate(0 ${((LAYERS[Math.min(i, 3)][1] + drop) * .85).toFixed(1)})`));
   }
-  addEventListener('scroll', readScroll, { passive: true });
-  addEventListener('resize', readScroll);
-  addEventListener('pointermove', e => { mx = (e.clientX / innerWidth - .5) * 2; }, { passive: true });
-
-  function render(t) {
-    cur += (target - cur) * (reduced ? 1 : .085);
-    mxCur += (mx - mxCur) * .05;
-    const p = cur, e = easeInOut(p), time = t / 1000;
-
-    sky.forEach((s, i) => s.setAttribute('stop-color', keyed(SKY[i], p)));
-    $('stars').setAttribute('opacity', (1 - smooth(.08, .5, p)).toFixed(3));
-
-    const sunP = smooth(.12, .8, p);
-    $('sun').setAttribute('transform', `translate(${1040 + mxCur * -6} ${lerp(880, 250, sunP)}) scale(${lerp(.8, 1.1, sunP)})`);
-    $('sun').setAttribute('opacity', smooth(.1, .35, p).toFixed(3));
-
-    LAYERS.forEach((L, i) => {
-      L.el.setAttribute('transform', `translate(${(mxCur * -(i + 1) * 7).toFixed(1)} ${(L.lift * e - RAISE[i] * (1 - e)).toFixed(1)})`);
-      L.el.setAttribute('fill', keyed(L.c, p));
-    });
-    $('alpenglow').setAttribute('opacity', (Math.sin(Math.PI * smooth(.2, .95, p)) * .55 + smooth(.8, 1, p) * .2).toFixed(3));
-
-    fogs.forEach((f, i) => {
-      const sp = +f.dataset.speed;
-      f.setAttribute('cx', (fogBase[i] + sp * p * 500 + Math.sin(time * .15 + i) * 30).toFixed(1));
-      f.setAttribute('transform', `translate(0 ${(LAYERS[Math.min(i, 3)].lift * e * .85 - FOG_RAISE[Math.min(i, 3)] * (1 - e)).toFixed(1)})`);
-      f.setAttribute('opacity', (1 - smooth(.6, 1, p) * .6).toFixed(3));
-    });
-
-    const cp = smooth(.22, .78, p);
-    $('condor').setAttribute('transform', `translate(${lerp(-120, 1720, cp).toFixed(1)} ${(260 + Math.sin(cp * 6) * 40).toFixed(1)}) rotate(${(Math.cos(cp * 6) * 8).toFixed(1)}) scale(.9)`);
-    $('condor').setAttribute('opacity', (cp > 0 && cp < 1 ? 1 : 0));
-    $('condor').setAttribute('fill', keyed(LAYERS[2].c, p));
-
-    // trazo de la cresta → flecha de crecimiento
-    const draw = smooth(.3, .82, p), len = TOTAL * draw;
-    $('ridgeLine').style.strokeDashoffset = TOTAL - len;
-    $('ridgeGlow').style.strokeDashoffset = TOTAL - len;
-    const [sx, sy] = pointAt(len);
-    $('spark').setAttribute('cx', sx); $('spark').setAttribute('cy', sy);
-    $('spark').setAttribute('opacity', draw > 0 && draw < 1 ? 1 : 0);
-    $('arrowHead').setAttribute('opacity', smooth(.97, 1, draw));
-    nodes.forEach(n => { const v = smooth(n.at - .02, n.at + .04, draw); n.el.style.opacity = v; n.lbl.style.opacity = 1 - smooth(.74, .86, p); });
-
-    // textos
-    const io = smooth(.02, .2, p);
-    intro.style.opacity = 1 - io;
-    titleSpans[0].style.transform = `translate(${-io * 18}vw, ${-io * 8}vh)`;
-    titleSpans[1].style.transform = `translate(${io * 18}vw, ${-io * 8}vh)`;
-    $('hint').style.opacity = 1 - smooth(0, .05, p);
-    const so = smooth(.78, .93, p);
-    summit.style.opacity = so;
-    summit.style.transform = `translateY(${(1 - so) * 50}px)`;
-    summit.classList.toggle('live', so > .5);
-
-    // altímetro: de Mérida (1.600 m) al Pico Bolívar (4.978 m)
-    const ap = smooth(0, .9, p), alt = Math.round(lerp(1600, 4978, ap));
-    if (alt !== last$) {
-      last$ = alt;
-      $('altNum').textContent = String(alt).replace(/\B(?=(\d{3})+(?!\d))/g, lang === 'es' ? '.' : ',') + ' m';
-      $('altLabel').textContent = STR[lang].alt[alt < 2600 ? 0 : alt < 3600 ? 1 : alt < 4700 ? 2 : alt < 4978 ? 3 : 4];
-      $('altFill').style.height = (ap * 100) + '%';
-    }
-
-    if (running) requestAnimationFrame(render);
+  placeRange();
+  addEventListener('resize', placeRange);
+  if (document.fonts) document.fonts.ready.then(placeRange);
+  // línea de crecimiento completa con su flecha y los nexos en las cimas
+  ['ridgeLine', 'ridgeGlow'].forEach(id => { $(id).style.strokeDasharray = 'none'; $(id).style.strokeDashoffset = 0; });
+  $('arrowHead').setAttribute('opacity', 1);
+  nodes.forEach(n => { n.el.style.opacity = 1; });
+  // altímetro fijo en la cima
+  function setAltimeter() {
+    $('altNum').textContent = (lang === 'es' ? '4.978' : '4,978') + ' m';
+    $('altLabel').textContent = STR[lang].alt[4];
   }
-  // sólo animar mientras el hero está en pantalla
-  new IntersectionObserver(([en]) => { const was = running; running = en.isIntersecting; if (running && !was) requestAnimationFrame(render); }).observe(hero);
-  readScroll(); requestAnimationFrame(render);
 
   /* ---------- nav ---------- */
   const nav = $('nav');
@@ -975,7 +879,7 @@
   buildMission();
   function missionScroll() {
     const r = mt.getBoundingClientRect();
-    const k = reduced ? 1 : clamp((innerHeight * .85 - r.top) / (innerHeight * .6));
+    const k = matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : clamp((innerHeight * .85 - r.top) / (innerHeight * .6));
     words.forEach((w, i) => { w.style.opacity = i / words.length < k ? 1 : .14; });
   }
   addEventListener('scroll', missionScroll, { passive: true }); missionScroll();
@@ -1017,7 +921,7 @@
     document.querySelectorAll('[data-act]').forEach(a => { const label = s.act[a.dataset.act] + ' ' + a.textContent; a.setAttribute('aria-label', label); a.title = label; });
     nodes.forEach(n => { const [a, b] = lang === 'es' ? [n.p.name, n.p.sub] : n.p.en; n.nm.textContent = a.toUpperCase(); n.sb.textContent = b; });
     buildMission(); missionScroll();
-    last$ = -1;
+    setAltimeter();
     document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
   }
   document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => {
